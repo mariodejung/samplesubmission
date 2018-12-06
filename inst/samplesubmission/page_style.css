@@ -1,0 +1,110 @@
+
+
+h2, h3{
+    background-color: silver;
+    font-size: 2em;
+}
+
+#stickers table {
+  table-layout: fixed;
+  width: 100%;
+  display: block;
+}
+
+#stickers thead, #stickers tbody{
+  width: 100%;
+  display:table-header-group;
+}
+
+#stickers th{
+   padding: 0.5cm;
+   font-size: 2em
+}
+
+#stickers tr:last-child td{
+   padding: 0.5cm;
+   font-size: 2em
+}
+
+#stickers tr:first-child span{
+  border: 2px;
+  border-style: dashed;
+  padding-top: .8cm;
+  padding-bottom: .8cm;
+  padding-right: 1.6cm;
+  padding-left: 1.6cm;
+  box-sizing: border-box
+  
+}
+#stickers tr:first-child td{
+ 
+  padding-top: 1cm;
+  padding-bottom: 1cm;
+}
+
+.comments{
+  border-style: solid;
+  border-width: 1px;
+  height: 2.5cm;
+  width: 100%;
+  padding:3px;
+  vertical-align: top;
+}
+
+#gel_picture img, #gel_picture p{
+  width: auto ;
+  height: 10cm;
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+  
+}
+  
+button {
+  font-size: 2.5em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  background-color: SteelBlue;
+  width: 30%;
+  
+}
+
+@page {
+  size: A4;
+  margin: 2cm;
+}
+
+/*@page :left {
+  margin-left: 4cm;
+  margin-right: 3cm;
+}*/
+
+@media print {
+  html, body {
+    page-break-inside: auto;
+  }
+  h2, h3{
+    -webkit-print-color-adjust: exact;
+    font-size: 1.3em;
+    margin-top:0.2cm;
+    background-color: silver;
+    background-clip: padding-box;
+    border-bottom: 2px solid;
+    page-break-after: avoid
+    /*box-shadow: 5px 10px #888888;*/
+  }
+  p {
+    color: black;
+    margin:0;
+  }
+  .unbreakable{
+    page-break-inside: avoid
+  }
+  
+  .p_invisible{
+    display: none;
+  }
+  /* ... the rest of the rules ... */
+}

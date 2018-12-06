@@ -1,0 +1,86 @@
+#' gather all necessary inputs and uploaded files,
+#' enriches them if necessary and puts them in the output dir
+#' @param allInputs all isolated inputs
+#' @param out_directory directory where the outputs well be written to
+#' @examples
+#' submitCompletedForm(isolate(reactiveValuesToList(input), "custormer_XY_date_AB")
+submitCompletedForm <- function(allInputs, out_directory) {
+  if(!dir.exists(out_directory)) dir.create(out_directory, recursive=TRUE)
+
+  #copy uploaded files from tmp folder
+  if(!is.null(allInputs$gel_picture)) {
+    allInputs$gel_picture$new_datapath <-
+      normalizePath(file.path(out_directory,
+                              paste("Gel_picture",
+                                    sub(".+\\.(.+)", "\\1", allInputs$gel_picture$name),
+                                    sep=".")))
+    file.copy(allInputs$gel_picture$datapath, allInputs$gel_picture$new_datapath)
+  }
+
+  db_out_directory <- file.path(out_directory, "Custom_DB")
+  if(!dir.exists(db_out_directory)) dir.create(db_out_directory)
+  if(!is.null(allInputs$custom_species_db_file)) {
+
+    allInputs$custom_species_db_file$new_datapath <-
+      normalizePath(file.path(db_out_directory,
+                              allInputs$custom_species_db_file$name))
+    file.copy(allInputs$custom_species_db_file$datapath,
+              allInputs$custom_species_db_file$new_datapath)
+  }
+
+  if(allInputs$fasta_sequence!='') {
+    ##TODO check content (fasta format)
+    path <- normalizePath(file.path(db_out_directory, "custom_seq.fasta"))
+
+    print("faste seq write....")
+    write(allInputs$fasta_sequence, file=path)
+    print("faste seq written")
+    allInputs$fasta_sequence <- list(content="Custom Sequence(s) uploaded",
+                                     path=path)
+  }else {
+    allInputs$fasta_sequence <- list(content=NULL,
+                                     path=NULL)
+  }
+
+  if(!is.null(allInputs$custom_background_db_file)) {
+    db_out_directory <- file.path(out_directory, "Custom_BG_DB")
+    if(!dir.exists(db_out_directory)) dir.create(db_out_directory)
+    allInputs$custom_background_db_file$new_datapath <-
+      normalizePath(file.path(db_out_directory,
+                              allInputs$custom_background_db_file$name))
+    file.copy(allInputs$custom_background_db_file$datapath,
+              allInputs$custom_background_db_file$new_datapath)
+  }
+
+
+  allInputs$species_dbs <- list(names=allInputs$species_dbs,
+                                paths=getFilenamesFromChosenDBs(allInputs, available_dbs))
+
+
+  yaml::write_yaml(allInputs,file.path(out_directory, user_inputs_file_name))
+
+  form_output_file <- file.path(out_directory, "CompletedForm.html")
+
+  rmarkdown::render(input="BandIdent_CompletedForm.Rmd",
+                    knit_root_dir=out_directory, output_dir=out_directory,
+                    output_file=form_output_file)
+
+
+  # insertUI(
+  #   selector="#submit",
+  #   where="afterEnd",
+  #   ui=tags$div(style="display: inline-block;",
+  #                 downloadButton("form_download", label="Download Form"))
+  # )
+  #
+  #
+  #
+  # output$form_download <- downloadHandler(
+  #   filename=paste(directory_name, "Form.html", sep=""),
+  #   content=function(file) {
+  #     file.copy(form_output_file, file)
+  #   }
+  # )
+
+  showAndPrintHtmlFile(form_output_file, allInputs$timestamp)
+}

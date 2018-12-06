@@ -1,0 +1,34 @@
+target_protein: ~
+name_protease: GluC
+dbs_comments: ''
+barcode_protease: asdfdf
+barcode_acid: 'asdf'
+custom_species_db: ''
+bandIdent_comments: ''
+group: FC prot
+name_protease-selectized: ''
+modification: ''
+testMark: 0
+background_dbs: E.coli
+custom_background_db_file: ~
+barcode_trypsin: ''
+staining: Coomassie
+custom_background_db: ''
+gel_picture: ~
+fasta_sequence:
+  content: ~
+  path: ~
+firstname: Tim
+target_protein-selectized: ''
+submit: 2
+email: ich@bin.gott
+protease: ''
+phone: '22234'
+species_dbs:
+  names: Platynereis dumerilii
+  paths: C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Platynereis_dumerilii_Uniprot_20170123.fasta
+band_weight_kda: 50
+surname: Gorn
+billing: billng
+custom_species_db_file: ~
+timestamp: 20181130_145227_Tim_Gorn_FC_prot

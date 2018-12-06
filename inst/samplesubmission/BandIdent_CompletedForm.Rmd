@@ -1,0 +1,176 @@
+---
+#title: "Band Identification Order Form"
+
+#documentclass: form #for pdf output. latex
+output:
+  html_document:
+    css: page_style.css
+    keep_md: true
+    
+#  pdf_document:
+#    includes:
+#      in_header: preamble.tex
+#      before_body: doc-prefix.tex
+#      after_body: doc-suffix.tex
+#    keep_tex: true
+#params:
+  # year: 2018
+  # region: Europe
+  # printcode: TRUE
+  # data: file.csv
+  # date: !r Sys.Date()
+---
+
+
+
+
+```{r include=FALSE}
+  user_inputs_file_name = "user_inputs.yaml" 
+  if(exists("allInputs")){
+    user_inputs <- allInputs
+    
+  }else {
+    user_inputs <- yaml::read_yaml(user_inputs_file_name)
+  }
+ 
+```
+
+
+<!-- <div style='width:800px'> -->
+
+<!-- <div class='header' style='margin-bottom:50px;'> -->
+<!-- <img src='`r system.file('extdata','imb_logo.png', package='cfpscripts')`' style='width:250px;' /> -->
+<!-- <p style='color:#0071BB; font-size:2.5em; float:right; margin:100px 100px 0px 0px;'>Proteomics Core Facility</p> -->
+<!-- <p style='color:#0071BB; font-size:2em; align:center; margin:0px 0px 0px 0px;'>Sample Submission sheet</p> -->
+<!-- <p style='float:right; '>`r user_inputs$timestamp`</p> -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+
+<div class='header' style='width:100%;clear:both; display:block'>
+<img src='`r system.file('extdata','imb_logo.png', package='cfpscripts')`' style='width:25%; float:left' />
+<div class='titel' style='width:70%; float:right'>
+<p style='color:#0071BB; font-size:2.5em;text-align: center; margin:30px 0px 0px 0px;'>Proteomics Core Facility</p>
+<p style='color:#0071BB; font-size:2em; text-align:center; margin:0px 0px 0px 0px;'>Sample Submission sheet</p>
+<p style='float:right; '>`r user_inputs$timestamp`</p>
+
+</div>
+</div>  
+
+<div style="clear:both;">
+
+
+##CUSTOMER
+
+**Customer:** `r paste(user_inputs$firstname, user_inputs$surname, sep=" ")`
+**Group:** `r user_inputs$group`  
+**Phone:** `r user_inputs$phone`
+**Mail:** `r user_inputs$email`  
+**Billing:** `r user_inputs$billing`    
+
+
+##SPECIES DATABASES 
+
+```{r results='asis', echo=FALSE}
+  cat(paste('-', user_inputs$species_dbs$names), sep = '\n')
+``` 
+
+**Custom DB:** `r paste(user_inputs$custom_species_db)`
+
+<!--
+**Custom DB file\:** `r paste(user_inputs$custom_species_db_file$name)`
+-->
+##BACKGROUND (protein expression)
+**Background species:** `r paste(user_inputs$background_dbs,collapse=",",sep=", ") `
+
+
+**Custom background DB:**
+`r paste(user_inputs$custom_background_db)`
+
+<!--
+**Custom background file\:**
+`r paste(user_inputs$custom_background_db_file$name)`
+-->
+
+###Databases relating comments
+<p class="comments"> `r user_inputs$dbs_comments`</p>
+
+
+##STAINING
+  **`r paste(user_inputs$staining)`**
+
+##BAND IDENTIFACATION
+
+**Protein(s) of interest:** `r paste(user_inputs$target_protein, sep=",")`
+
+**Moleculare weight of band:** `r paste(user_inputs$band_weight_kda)` kDa
+
+**Fasta sequence\:** `r user_inputs$fasta_sequence$content`
+
+**Protease:** `r paste(user_inputs$protease)`
+
+**Modification:** `r paste(user_inputs$modification)`
+
+###Band Identification comments
+<p class="comments"> `r user_inputs$bandIdent_comments`</p>
+
+<div class="unbreakable", id="gel_picture">
+
+##GEL PICTURE
+```{r results='asis', echo=FALSE, comment=NA}
+  if(is.null(user_inputs$gel_picture)){
+    cat("(_No Picture Uploaded_)")
+  }else{
+    knitr::include_graphics(user_inputs$gel_picture$new_datapath)
+  }
+```
+</div>
+
+
+<!--
+**BARCODE TRYPSIN:** `r paste(user_inputs$barcode_trypsin)`
+**BARCODE ACID:** `r paste(user_inputs$barcode_acid)`
+**BARCODE PROTEASE:** `r paste(user_inputs$barcode_protease)`
+-->
+
+<div id="stickers" class="unbreakable">
+##BARCODE STICKERS
+```{r echo=FALSE, results='asis'}
+if(user_inputs$barcode_acid!=''){
+  cat('
+<p style="color:red">__Please provide enough material(= two identical band but two 
+                  different sticker numbers). One sample will be digested with 
+                  trypsin and the other hydrolysed with 3M HCl__</p>')
+}
+
+```
+```{r  echo=FALSE, comment=NA, results='asis'}
+  var_to_readable = list("barcode_acid"="Acid Hydrolysis",
+                  "barcode_trypsin"="Trypsin",
+                  "barcode_protease"=user_inputs$name_protease)
+  var_to_readable <- var_to_readable[grep(".",user_inputs[names(var_to_readable)])]
+  
+  df=t(data.frame(
+    # variables=grep('barcode_', names(user_inputs), value=TRUE),
+    sticker=rep("<span>Sticker</span>", length(var_to_readable)),
+    values=unlist(user_inputs[names(var_to_readable)]),
+    
+    row.names=unlist(var_to_readable)
+  ))
+  rownames(df)=NULL
+  if(length(df) > 0){
+    knitr::kable(df, format="markdown", align='c', escape=FALSE)
+  }else{
+    cat("__NO BARCODES ENTERED__")
+  }
+```
+</div>
+
+</div> 
+
+<button type="button", class="p_invisible"
+onclick="window.print()">
+Print</button>
+
+

@@ -1,0 +1,44 @@
+.userinfos > div.shiny-input-container{
+  display: inline-block;
+  width: 4cm ;
+  
+}
+
+.required-asterix{
+  font-size: 2em;
+  padding-top:0;
+  padding-bottom:0;
+  margin-top:0;
+  margin-bottom:0;
+  color: red;
+}
+
+.required-error-message{
+  font-size: 0.7em;
+  padding-top:0;
+  padding-bottom:0;
+  margin-top:0;
+  margin-bottom:0;
+  color: red;
+}
+
+h1, h2 {
+  text-align: center;
+  
+}
+
+h3 {
+  background-color: silver;
+}
+
+#submit {
+  font-size: 2.5em;
+  display: block;
+  
+  
+  margin-right: auto;
+  border-radius: 15px;
+  background-color: SteelBlue;
+  width: 30%;
+  
+}
