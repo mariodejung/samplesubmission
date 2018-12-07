@@ -1,34 +1,50 @@
-target_protein: ~
-name_protease: GluC
+target_protein:
+- G5EDF7
+- P45963
+- asdf
+name_protease: AspN
 dbs_comments: ''
-barcode_protease: asdfdf
-barcode_acid: 'asdf'
+barcode_protease: asdf bar
+barcode_acid: asdf
 custom_species_db: ''
-bandIdent_comments: ''
-group: FC prot
+bandIdent_comments: asdf
+group: IMB_EW
 name_protease-selectized: ''
-modification: ''
+modification: dfasdf
+affiliation: ''
 testMark: 0
-background_dbs: E.coli
+background_dbs:
+  names: Arabidopsis thaliana (ARATH)
+  paths: C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Arabidopsis_thaliana_(ARATH)_Uniprot_20180108.fasta
 custom_background_db_file: ~
-barcode_trypsin: ''
+barcode_trypsin: tryp bar
 staining: Coomassie
 custom_background_db: ''
 gel_picture: ~
 fasta_sequence:
   content: ~
   path: ~
-firstname: Tim
-target_protein-selectized: ''
-submit: 2
-email: ich@bin.gott
+firstname: Timur
+target_protein-selectized: asdf
+submit: 1
+email: 1ß2348
 protease: ''
-phone: '22234'
+phone: 23ß4
 species_dbs:
-  names: Platynereis dumerilii
-  paths: C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Platynereis_dumerilii_Uniprot_20170123.fasta
+  names:
+  - Caenorhabditis elegans (CAEEL)
+  - Gallus gallus (CHICKEN)
+  - Platynereis dumerilii
+  paths:
+  - C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Caenorhabditis_elegans_(CAEEL)_Uniprot_20170123.fasta
+  - C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Gallus_gallus_(CHICKEN)_Uniprot_20180108.fasta
+  - C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Platynereis_dumerilii_Uniprot_20170123.fasta
 band_weight_kda: 50
-surname: Gorn
-billing: billng
+surname: Horn
+billing: ß012345
 custom_species_db_file: ~
-timestamp: 20181130_145227_Tim_Gorn_FC_prot
+timestamp: 20181207_145654_Timur_Horn_IMB_EW
+enzymes:
+- AspN
+- Trypsin
+- Acid

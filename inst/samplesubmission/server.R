@@ -17,7 +17,7 @@ server <- function(input, output, session) {
   observeEvent({paste(input$species_dbs, input$custom_species_db_file)},
                {
                  #print(typeof(input$custom_species_db_file))
-                 file_names <- getFilenamesFromChosenDBs(input, available_dbs)
+                 file_names <- getFilenamesFromDBnames(input$species_dbs)
 
                  if(!is.null(input$custom_species_db_file)){
                    file_names <- c(file_names, input$custom_species_db_file[["datapath"]])

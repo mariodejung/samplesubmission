@@ -53,10 +53,26 @@ submitCompletedForm <- function(allInputs, out_directory) {
   }
 
 
+# databases summary -------------------------------------------------------
+
+
   allInputs$species_dbs <- list(names=allInputs$species_dbs,
-                                paths=getFilenamesFromChosenDBs(allInputs, available_dbs))
+                                paths=getFilenamesFromDBnames(allInputs$species_dbs))
+  allInputs$background_dbs <- list(names=allInputs$background_dbs,
+                                paths=getFilenamesFromDBnames(allInputs$background_dbs))
+  
 
+# enzymes summary ---------------------------------------------------------
 
+  enzymes = c()
+  if(allInputs$barcode_protease!='') enzymes <- allInputs$name_protease
+  
+  if(allInputs$barcode_trypsin!='') enzymes <- c(enzymes, "Trypsin")
+  if(allInputs$barcode_acid!='') enzymes <- c(enzymes, "Acid")
+  
+  allInputs$enzymes <- enzymes
+  
+  
   yaml::write_yaml(allInputs,file.path(out_directory, user_inputs_file_name))
 
   form_output_file <- file.path(out_directory, "CompletedForm.html")
