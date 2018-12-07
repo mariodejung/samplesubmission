@@ -23,6 +23,10 @@ validateUserInformation <- function(inputs, user_inputs_info_ids) {
                                                   message='Field is OK')
     }
   }
+  
+  if(inputs$group == ''){
+    results[[length(results) + 1]] <- Validated("group", "Please specify a group")
+  }
 
   return(results)
 }

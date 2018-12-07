@@ -36,7 +36,7 @@ ui <- fluidPage(theme="style.css",
                       shiny::textInput(field, user_info_fields[[field]])
                     })),
 
-                    shiny::selectInput("group", "Group",
+                    shiny::selectInput("group", "Group", selectize=FALSE,
                                        choices=c("",as.character(available_groups$V1))),
                     shiny::textAreaInput("affiliation", "Affiliation", cols=3)
 
