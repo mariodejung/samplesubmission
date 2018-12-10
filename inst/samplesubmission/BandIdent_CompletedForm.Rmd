@@ -63,7 +63,7 @@ output:
 
 ##CUSTOMER
 
-**Customer:** `r paste(user_inputs$firstname, user_inputs$surname, sep=" ")`
+**Customer:** `r paste(user_inputs$firstname, user_inputs$surname, sep=", ")`
 **Group:** `r user_inputs$group`  
 **Phone:** `r user_inputs$phone`
 **Mail:** `r user_inputs$email`  

@@ -16,6 +16,8 @@ library(yaml)
 library(seqinr)
 library(cfpscripts)
 library(rmarkdown)
+library(pdftools)
+
 library(samplesubmission)
 
 ##Mario General ToDo
@@ -56,6 +58,7 @@ species_dbs <-
 if(file.exists("Available_species_DBs.csv")){
   available_dbs <- read.csv2("Available_species_DBs.csv", stringsAsFactors=FALSE)
   species_dbs <- available_dbs$species_names
+  print(species_dbs)
 }
 
 available_proteases <- c("undefined","AspN", "GluC", "LysC", "Chymotrypsin")

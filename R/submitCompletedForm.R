@@ -15,6 +15,13 @@ submitCompletedForm <- function(allInputs, out_directory) {
                                     sub(".+\\.(.+)", "\\1", allInputs$gel_picture$name),
                                     sep=".")))
     file.copy(allInputs$gel_picture$datapath, allInputs$gel_picture$new_datapath)
+    #extract fist page from pdf as image
+    if(grepl("\\.pdf$", allInputs$gel_picture$new_datapath)){
+      bitmap <- pdf_render_page(allInputs$gel_picture$new_datapath, page = 1, dpi= 144)
+      allInputs$gel_picture$new_datapath <- sub("pdf$", "png", allInputs$gel_picture$new_datapath)
+      png::writePNG(bitmap, allInputs$gel_picture$new_datapath)
+      
+    }
   }
 
   db_out_directory <- file.path(out_directory, "Custom_DB")
@@ -38,7 +45,7 @@ submitCompletedForm <- function(allInputs, out_directory) {
     allInputs$fasta_sequence <- list(content="Custom Sequence(s) uploaded",
                                      path=path)
   }else {
-    allInputs$fasta_sequence <- list(content=NULL,
+    allInputs$fasta_sequence <- list(content="No custom sequence(s) uploaded",
                                      path=NULL)
   }
 

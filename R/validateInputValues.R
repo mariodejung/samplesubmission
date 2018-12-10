@@ -17,7 +17,8 @@ validateInputValues <- function (inputs) {
     validateUserInformation(inputs, names(user_info_fields)),
     validateDataBases(inputs),
     validateBarCodes(inputs),
-    validateFastaInputs(inputs)
+    validateFastaInputs(inputs),
+    validateGeneralSettings(inputs)
   )
 
 

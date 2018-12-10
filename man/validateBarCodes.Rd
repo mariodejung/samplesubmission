@@ -4,10 +4,12 @@
 \alias{validateBarCodes}
 \title{performs a validation check on the barcodes fields}
 \usage{
-validateBarCodes(inputs)
+validateBarCodes(inputs, pattern = "^IMB_\\\\w+_\\\\d{3,5}$")
 }
 \arguments{
 \item{inputs}{isolated input list}
+
+\item{pattern}{regex pattern to be matched the barcodes}
 }
 \value{
 list of validation results

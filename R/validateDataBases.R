@@ -16,5 +16,16 @@ validateDataBases <- function(inputs) {
                                                 valid=TRUE,
                                                 message=paste(inputs$species_dbs))
   }
+  
+  if(validateFastaSequences(inputs$fasta_sequence)){
+    results[[length(results) + 1]] <- Validated("fasta_sequence",
+                                                valid=TRUE,
+                                                message="Fasta sequence is valid or empty")
+  }else{
+    results[[length(results) + 1]] <- Validated("fasta_sequence",
+                                                valid=FALSE,
+                                                message="Does not meet the requirements")
+  }
+  
   return(results)
 }
