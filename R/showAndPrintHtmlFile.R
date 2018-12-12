@@ -3,6 +3,7 @@
 #' @export
 #' @param path server path to a file
 #' @param name_replacement optional, new name for the html file
+#' @import shinyjs
 #' @examples
 #' showAndPrintHtmlFile("form.html", "tmp")
 showAndPrintHtmlFile <- function(path, name_replacement=NULL){

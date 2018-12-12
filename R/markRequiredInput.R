@@ -4,6 +4,7 @@
 #' @export
 #' @param inputId the id of an input field
 #' @param message a messaged showed under the input field label
+#' @import shiny
 #' @examples
 #' markRequiredInput("surename", "field is mandatory")
 markRequiredInput <- function(inputId, message=''){

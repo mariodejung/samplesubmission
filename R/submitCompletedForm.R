@@ -2,6 +2,10 @@
 #' enriches them if necessary and puts them in the output dir
 #' @param allInputs all isolated inputs
 #' @param out_directory directory where the outputs well be written to
+#' @import yaml
+#' @import png
+#' @import pdftools
+#' @import rmarkdown
 #' @examples
 #' submitCompletedForm(isolate(reactiveValuesToList(input), "custormer_XY_date_AB")
 submitCompletedForm <- function(allInputs, out_directory) {
@@ -86,7 +90,7 @@ submitCompletedForm <- function(allInputs, out_directory) {
   enzymes = c()
   if(allInputs$barcode_protease!='') enzymes <- allInputs$name_protease
   
-  if(allInputs$barcode_trypsin!='') enzymes <- c(enzymes, "Trypsin")
+  if(allInputs$barcode_trypsin!='') enzymes <- c(enzymes, "Trypsin/P")
   if(allInputs$barcode_acid!='') enzymes <- c(enzymes, "Acid")
   
   allInputs$enzymes <- enzymes

@@ -1,7 +1,3 @@
-library(readr)
-library(stringr)
-
-
 #' Creates a csv file with containing a summary of all fasta files found in the directory
 #' tries to extract species names from the file names
 #' @export
@@ -9,6 +5,8 @@ library(stringr)
 #' @param out_file file name (or path) for the summary output file. If NULL no file will be written
 #' @param file_name_pattern file name pattern to filter the file names 
 #' @return data frame with the summary
+#' @import readr
+#' @import stringr
 #' @examples 
 #' createSummaryFileOfFastaFiles()
 #' createSummaryFileOfFastaFiles("fasta_dir", "summary.csv", "(HUMAN|YEAST).*\\.fasta$")

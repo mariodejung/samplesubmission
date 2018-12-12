@@ -1,15 +1,15 @@
 #' performs a validation on user infos fields
 #' @param inputs isolated input list
-#' @param user_inputs_info_ids list of input filed ids
 #' @return list of validation results
 #' @seealso Validated
 #' @examples
 #' validateUserInformation(isolate(reactiveValuesToList(input)))
-validateUserInformation <- function(inputs, user_inputs_info_ids) {
+validateUserInformation <- function(inputs) {
+  
+  user_info_fields <- get('user_info_fields')
+  user_inputs_info_ids <- names(user_info_fields)
+
   results <- list()
-
-  #user_inputs_info_ids <- names(user_info_fields)
-
   ##TODO avoid loops
   for(inputId in user_inputs_info_ids){
 

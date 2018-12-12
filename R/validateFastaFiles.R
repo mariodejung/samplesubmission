@@ -3,6 +3,7 @@
 #' @export
 #' @param file_path fasta file paths
 #' @return logical, whether the file is a fasta file or NULL if file_path is NULL
+#' @import seqinr
 #' @examples
 #' validateFastaFiles("fasta_DB.fasta")
 validateFastaFiles <- function(file_path) {
