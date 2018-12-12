@@ -5,8 +5,10 @@
 #' @examples
 #' validateDataBases(isolate(reactiveValuesToList(input)))
 validateDataBases <- function(inputs) {
+  
+  
   results <- list()
-  if(is.null(inputs$species_dbs) && inputs$custom_species_db == ''){
+  if((is.null(inputs$species_dbs) || inputs$species_dbs=="--none--")  && inputs$custom_species_db == ''){
     results[[length(results) + 1]] <- Validated("species_dbs",
                                                 valid=FALSE,
                                                 message='No species database chosen')
@@ -17,6 +19,10 @@ validateDataBases <- function(inputs) {
                                                 message=paste(inputs$species_dbs))
   }
   
+  
+
+# Sequence ----------------------------------------------------------------
+
   if(validateFastaSequences(inputs$fasta_sequence)){
     results[[length(results) + 1]] <- Validated("fasta_sequence",
                                                 valid=TRUE,

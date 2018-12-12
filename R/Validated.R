@@ -1,6 +1,6 @@
 #' creates a status object (named list)
 #' comfort function
-#' @param input_elemnt_id id of a input element
+#' @param input_element_id id of a input element
 #' @param message message string
 #' @param valid validation status
 #' @return anmed list containing the inputs

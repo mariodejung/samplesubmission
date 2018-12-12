@@ -7,7 +7,7 @@
 submitCompletedForm <- function(allInputs, out_directory) {
   if(!dir.exists(out_directory)) dir.create(out_directory, recursive=TRUE)
 
-  #copy uploaded files from tmp folder
+# Copy unloaded image -----------------------------------------------------
   if(!is.null(allInputs$gel_picture)) {
     allInputs$gel_picture$new_datapath <-
       normalizePath(file.path(out_directory,
@@ -18,12 +18,16 @@ submitCompletedForm <- function(allInputs, out_directory) {
     #extract fist page from pdf as image
     if(grepl("\\.pdf$", allInputs$gel_picture$new_datapath)){
       bitmap <- pdf_render_page(allInputs$gel_picture$new_datapath, page = 1, dpi= 144)
-      allInputs$gel_picture$new_datapath <- sub("pdf$", "png", allInputs$gel_picture$new_datapath)
+      allInputs$gel_picture$new_datapath <- sub("pdf$", "png",
+                                                allInputs$gel_picture$new_datapath)
       png::writePNG(bitmap, allInputs$gel_picture$new_datapath)
-      
     }
   }
+  
 
+# Copy custom DBs, will not used--------------------------------------------------
+
+  
   db_out_directory <- file.path(out_directory, "Custom_DB")
   if(!dir.exists(db_out_directory)) dir.create(db_out_directory)
   if(!is.null(allInputs$custom_species_db_file)) {
@@ -34,21 +38,7 @@ submitCompletedForm <- function(allInputs, out_directory) {
     file.copy(allInputs$custom_species_db_file$datapath,
               allInputs$custom_species_db_file$new_datapath)
   }
-
-  if(allInputs$fasta_sequence!='') {
-    ##TODO check content (fasta format)
-    path <- normalizePath(file.path(db_out_directory, "custom_seq.fasta"))
-
-    print("faste seq write....")
-    write(allInputs$fasta_sequence, file=path)
-    print("faste seq written")
-    allInputs$fasta_sequence <- list(content="Custom Sequence(s) uploaded",
-                                     path=path)
-  }else {
-    allInputs$fasta_sequence <- list(content="No custom sequence(s) uploaded",
-                                     path=NULL)
-  }
-
+  
   if(!is.null(allInputs$custom_background_db_file)) {
     db_out_directory <- file.path(out_directory, "Custom_BG_DB")
     if(!dir.exists(db_out_directory)) dir.create(db_out_directory)
@@ -58,7 +48,29 @@ submitCompletedForm <- function(allInputs, out_directory) {
     file.copy(allInputs$custom_background_db_file$datapath,
               allInputs$custom_background_db_file$new_datapath)
   }
+  
 
+# Custom sequence processing ----------------------------------------------
+
+  if(allInputs$fasta_sequence!='') {
+    fasta_sequence <- normalizeFastaSeq(allInputs$fasta_sequence)
+    ##TODO check content (fasta format)
+    path <- normalizePath(file.path(db_out_directory, "custom_seq.fasta"))
+
+    print("faste seq write....")
+    write(fasta_sequence, file=path)
+    print("faste seq written")
+    allInputs$fasta_sequence <- list(content="Custom Sequence(s) uploaded",
+                                     path=path)
+    allInputs$target_protein <- c(allInputs$target_protein,
+                                  extrProtIdsFromFasta(path))
+    
+  }else {
+    allInputs$fasta_sequence <- list(content="No custom sequence(s) uploaded",
+                                     path=NULL)
+  }
+
+  
 
 # databases summary -------------------------------------------------------
 

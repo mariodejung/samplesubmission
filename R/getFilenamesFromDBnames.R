@@ -4,13 +4,13 @@
 #' @examples
 #' getFilenamesFromDBnames("Human")
 getFilenamesFromDBnames <- function(db_names) {
-  file_names <- c()
+  file_paths <- c()
   if(exists("available_dbs")) {
-    db_indecies <- (unique(match(db_names, available_dbs$species_names)))
-    file_names <- available_dbs$absolute_path[db_indecies]
-    #print(file_names)
+    db_indecies <- na.omit(unique(match(db_names, available_dbs$species_names)))
+    file_paths <- available_dbs$absolute_path[db_indecies]
+   
   }
-  return(file_names)
+  return(file_paths)
 }
 
 

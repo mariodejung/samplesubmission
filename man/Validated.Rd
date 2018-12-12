@@ -8,11 +8,11 @@ comfort function}
 Validated(input_element_id, message = NULL, valid = FALSE)
 }
 \arguments{
+\item{input_element_id}{id of a input element}
+
 \item{message}{message string}
 
 \item{valid}{validation status}
-
-\item{input_elemnt_id}{id of a input element}
 }
 \value{
 anmed list containing the inputs

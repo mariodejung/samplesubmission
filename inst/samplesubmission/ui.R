@@ -37,7 +37,7 @@ ui <- fluidPage(theme="style.css",
                     })),
 
                     shiny::selectInput("group", "Group", selectize=FALSE,
-                                       choices=c("",as.character(available_groups$V1))),
+                                       choices=c("", names(available_groups))),
                     shiny::textAreaInput("affiliation", "Affiliation", cols=3)
 
                     ##Mario also commented below, these fields should be created with a list since you will use ALL these names again for validation.
@@ -103,7 +103,8 @@ ui <- fluidPage(theme="style.css",
            h3("Background"),
            shiny::selectInput(inputId="background_dbs",label="Database:",
                               selectize=F, width="100%",
-                              choices=background_dbs),
+                              choices=background_dbs,
+                              multiple=F, size=length(background_dbs)),
            shiny::textInput(inputId="custom_background_db", label="Other:", width="5cm"),
            hidden(
              shiny::fileInput(inputId="custom_background_db_file",

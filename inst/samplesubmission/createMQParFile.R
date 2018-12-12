@@ -7,6 +7,7 @@
 # )
 
 parameterGroups <- list(
+  list(mode=0, enzyme=c('LysC','GluC')),
   list(mode=0, enzyme=c('LysC','GluC'))
 )
 
@@ -22,13 +23,13 @@ enzymes <- user_inputs$enzymes
 
 fasta_paths <- unique(c(user_inputs$species_dbs$paths,
                  user_inputs$background_dbs$paths,
-                 user_inputs$custom_background_db_file,
-                 user_inputs$custom_species_db_file,
+                 #user_inputs$custom_background_db_file,
+                 #user_inputs$custom_species_db_file,
                  user_inputs$fasta_sequence$path))
 
 filled_template <- fillMqparTemplate(parameterGroups, fasta_paths)
 
-write_file(filled_template,"Test_mqpar.xml")
+writeLines(filled_template,"Test_mqpar.xml")
 
 #' fills a template mqpar string with the given infos 
 #' @param paramterGroups list of parameterGroups settings (mode, enzymes)
@@ -42,8 +43,8 @@ write_file(filled_template,"Test_mqpar.xml")
 fillMqparTemplate <- function (parameterGroups,
                                fastaFiles,
                                rowFiles=NULL,
-                               templateFile="mqpar_template.xml"){
-  template <- read_file(templateFile)
+                               templateFile="mqpar.tmp.xml"){
+  template <- readLines(templateFile)
   parameterGroup_string <- 
     "<parameterGroup>
   <msInstrument>0</msInstrument>
@@ -179,23 +180,48 @@ fillMqparTemplate <- function (parameterGroups,
   
   
   group_indices <- paste0("<int>", 0:(length(parameterGroups)-1), "</int>", collapse="\n")
-  fasta_paths <- paste0("<string>", fastaFiles, "</string>", collapse="\n")
+  experiment_str <- paste0(rep("<string></string>", length(parameterGroups) ), collapse="\n", sep="\n")
+  fractions_str <- paste0(rep("<short>32767</short>", length(parameterGroups)), collapse="\n", sep="\n")
+  ptms_str <- paste0(rep("<boolean>False</boolean>", length(parameterGroups)), collapse="\n", sep="\n")
+  
+  patterns <- getProtIdRegexFromFileName(fastaFiles)
+  patterns <- gsub("\\\\", "\\\\\\\\", patterns) # mask \\ for substitution
+  fasta_paths <- preparePathForSub(fastaFiles)
+  fasta_paths <- paste0("<FastaFileInfo>
+         <fastaFilePath>", fasta_paths, "</fastaFilePath>
+         <identifierParseRule>", patterns, "</identifierParseRule>
+                        <descriptionParseRule>>(.*)</descriptionParseRule>
+                        <taxonomyParseRule></taxonomyParseRule>
+                        <variationParseRule></variationParseRule>
+                        <modificationParseRule></modificationParseRule>
+                        <taxonomyId></taxonomyId>
+                        </FastaFileInfo>", collapse="\n")
   
   template <- sub("##__Parameter_Groups__##", par_groups, template)
   template <- sub("##__Group_Indices__##", group_indices, template)
-  #TODO \\ disappears
-  fasta_paths <- gsub("\\\\", "\\\\\\\\", fasta_paths)# seems to work
+  template <- sub("##__experiment__##", experiment_str, template)
+  template <- sub("##__fractions__##", fractions_str, template)
+  template <- sub("##__ptms__##", ptms_str, template)
   template <- sub("##__fastaFiles_##", fasta_paths, template)
-  print(fasta_paths)
   
   if(!is.null(rowFiles)){
-    row_paths <- fasta_paths <- paste0("<string>", rowFiles, "</string>", collapse="\n")
-    fasta_paths <- gsub("\\\\", "\\\\\\\\", fasta_paths)
+    row_paths <- preparePathForSub(rowFiles)
+    row_paths <- paste0("<string>", row_paths, "</string>", collapse="\n")
     template <- sub("##__rowFiles__##", row_paths, template)  
+   
   }
   
 
   return(template)
 }
-
-
+#' normalize and prepare one or more paths for substitution into a string template
+#' e.g. for Max Quant template string
+#' @param paths paths to be prepared
+#' @return prepared path(s)
+#' @example 
+#' preparePathForSub("test_dir/fasta_file.fasta")
+#' 
+preparePathForSub <- function(paths){
+  paths <- normalizePath(paths)
+  return(gsub("\\\\", "\\\\\\\\", paths))
+}

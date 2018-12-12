@@ -12,21 +12,22 @@ validateBarCodes <- function(inputs, pattern="^IMB_\\w+_\\d{3,5}$") {
   #barcode_trypsin
   #barcode_protease
   
-
-  if(inputs$barcode_trypsin == '' && inputs$barcode_protease == '') {
-    results[[length(results) + 1]] <- Validated("barcode_trypsin",
-                                                valid=FALSE,
-                                                message='At least one enzyme needed')
-    results[[length(results) + 1]] <- Validated("barcode_protease",
-                                                valid=FALSE,
-                                                message='At least one enzyme needed')
-    
-  }else{
-    for(barcode in c("barcode_acid", "barcode_trypsin", "barcode_protease")){
-      if(inputs[barcode]!='' && !grepl(pattern, inputs[barcode])){
-        results[[length(results) + 1]] <- Validated(barcode,
-                                                    valid=FALSE,
-                                                    message='Don\'t meet the required format')
+  if(!inputs$group=="EXT_CF"){
+    if(inputs$barcode_trypsin == '' && inputs$barcode_protease == '') {
+      results[[length(results) + 1]] <- Validated("barcode_trypsin",
+                                                  valid=FALSE,
+                                                  message='At least one enzyme needed')
+      results[[length(results) + 1]] <- Validated("barcode_protease",
+                                                  valid=FALSE,
+                                                  message='At least one enzyme needed')
+      
+    }else{
+      for(barcode in c("barcode_acid", "barcode_trypsin", "barcode_protease")){
+        if(inputs[barcode]!='' && !grepl(pattern, inputs[barcode])){
+          results[[length(results) + 1]] <- Validated(barcode,
+                                                      valid=FALSE,
+                                                      message='Don\'t meet the required format')
+        }
       }
     }
   }

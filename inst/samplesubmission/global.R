@@ -26,27 +26,24 @@ library(samplesubmission)
 ##Mario * add documentation to functions, shouldn't be much but roughly telling what they do and what they return
 ##Mario * recommended but not mendatory, add the package to the related function, e.g. shinyjs::useShinyjs()
 
-#Output directory for all orders
-orders_directory <- file.path(".", "outputs")
 
-maximum_upload_megabytes <- 40
+config <- yaml::read_yaml("config.yaml")
+
+#Output directory for all orders
+orders_directory <- config$orders_directory
+
+maximum_upload_megabytes <- config$maximum_upload_megabytes
 options(shiny.maxRequestSize=maximum_upload_megabytes * 1024^2)
 
-user_inputs_file_name <- "user_inputs.yaml"
+user_inputs_file_name <- config$user_inputs_file_name
 
 user_info_fields <- list(surname="Surname",
                          firstname="Firstname",
-                         #group="Group",
                          phone="Phone",
                          billing="Billing",
                          email="Email")
 
-#fallback df
-available_groups <- data.frame(V1=c("IMB_EW", "IMB_BU", "EXT_CF"),
-                               V2=c("Eva Wolf", "Falk Butter", "External"))
-if(file.exists("groups.txt")){
-  available_groups <- read.delim("groups.txt", header=FALSE)
-}
+available_groups <- config$available_groups
 
 #fallback
 species_dbs <-
@@ -55,28 +52,19 @@ species_dbs <-
     x.laevis="X.laevis",
     c.elegans="C.elegans")
 
-if(file.exists("Available_species_DBs.csv")){
-  available_dbs <- read.csv2("Available_species_DBs.csv", stringsAsFactors=FALSE)
-  species_dbs <- available_dbs$species_names
-  print(species_dbs)
+if(file.exists(config$db_summary_file)){
+  available_dbs <- read.csv2(config$db_summary_file, stringsAsFactors=FALSE)
+  species_dbs <- c("--none--", available_dbs$species_names)
+  #print(species_dbs)
 }
 
-available_proteases <- c("undefined","AspN", "GluC", "LysC", "Chymotrypsin")
+background_dbs <- species_dbs
+
+available_proteases <- config$available_proteases
 
 extend_js_code <- 'shinyjs.winopenAndPrint=function(url){
 myWindow=window.open(url, "_blank");
 myWindow.print()
 }'
-
-background_dbs <- list(E.coli="E.coli", S.cerevisiae="S.cerevisiae") ##Mario background might be the same as species_dbs in the end
-background_dbs <- species_dbs
-
-#define UI
-
-# Define server logic
-
-
-# Run the application
-#shinyApp(ui=ui, server=server)
 
 
