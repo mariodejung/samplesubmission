@@ -19,7 +19,9 @@ list of validation results
 validates input fields related to uploaded fasta files
 }
 \examples{
+\dontrun{
 validateFastaInputs(isolate(reactiveValuesToList(input)))
+}
 }
 \seealso{
 Validated

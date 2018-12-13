@@ -5,7 +5,9 @@
 #' @return logical, whether the file is a fasta file or NULL if file_path is NULL
 #' @import seqinr
 #' @examples
+#' \dontrun{
 #' validateFastaFiles("fasta_DB.fasta")
+#' }
 validateFastaFiles <- function(file_path) {
 
   if(!is.null(file_path)){

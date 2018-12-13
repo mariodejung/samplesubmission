@@ -16,7 +16,9 @@ list of validation results
 performs a validation on miscellaneous settings
 }
 \examples{
+\dontrun{
 validateUserInformation(isolate(reactiveValuesToList(input)))
+}
 }
 \seealso{
 Validated

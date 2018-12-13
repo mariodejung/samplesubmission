@@ -16,7 +16,9 @@ list of validation results
 performs a validation on the whole web-form
 }
 \examples{
+\dontrun{
 validateInputValues(isolate(reactiveValuesToList(input)))
+}
 }
 \seealso{
 Validated

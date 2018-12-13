@@ -17,5 +17,7 @@ gather all necessary inputs and uploaded files,
 enriches them if necessary and puts them in the output dir
 }
 \examples{
+\dontrun{
 submitCompletedForm(isolate(reactiveValuesToList(input), "custormer_XY_date_AB")
+}
 }

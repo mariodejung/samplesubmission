@@ -17,5 +17,7 @@ Marks an input field as required
 appends an asterix to the label und a message unter the label
 }
 \examples{
+\dontrun{
 markRequiredInput("surename", "field is mandatory")
+}
 }

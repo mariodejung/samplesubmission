@@ -4,8 +4,11 @@
 #' @return list of validation results
 #' @seealso Validated
 #' @examples
+#' \dontrun{
 #' validateInputValues(isolate(reactiveValuesToList(input)))
+#' }
 validateInputValues <- function (inputs) {
+  
   #list of named lists whith the following members
 
   #input_element_id
@@ -13,7 +16,7 @@ validateInputValues <- function (inputs) {
   #message
 
   results <- c(
-    validateUserInformation(inputs, names(user_info_fields)),
+    validateUserInformation(inputs),
     validateDataBases(inputs),
     validateBarCodes(inputs),
     validateFastaInputs(inputs),

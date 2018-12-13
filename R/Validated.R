@@ -4,6 +4,7 @@
 #' @param message message string
 #' @param valid validation status
 #' @return anmed list containing the inputs
+#' @export
 #' @examples
 #' Validated("surename", "Mandatory field", FALSE )
 Validated <- function(input_element_id, message=NULL, valid=FALSE) {

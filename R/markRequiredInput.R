@@ -6,7 +6,9 @@
 #' @param message a messaged showed under the input field label
 #' @import shiny
 #' @examples
+#' \dontrun{
 #' markRequiredInput("surename", "field is mandatory")
+#' }
 markRequiredInput <- function(inputId, message=''){
 
   jquery <- paste0("label[for='", inputId, "']")

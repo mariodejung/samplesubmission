@@ -4,7 +4,9 @@
 #' @param output output passed-through server function
 #' @param output_dir directory path, where all orders are in
 #' @examples
+#' \dontrun{
 #' apply_submit(input, output, "orders_dir")
+#' }
 apply_submit <- function(input,output, output_dir){
 
   allInputs <- isolate(reactiveValuesToList(input))

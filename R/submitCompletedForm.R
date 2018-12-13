@@ -7,11 +7,15 @@
 #' @import pdftools
 #' @import rmarkdown
 #' @examples
+#' \dontrun{
 #' submitCompletedForm(isolate(reactiveValuesToList(input), "custormer_XY_date_AB")
+#' }
 submitCompletedForm <- function(allInputs, out_directory) {
   if(!dir.exists(out_directory)) dir.create(out_directory, recursive=TRUE)
 
-# Copy unloaded image -----------------------------------------------------
+  user_inputs_file_name <- get("user_inputs_file_name")
+  
+# Copy uploaded image -----------------------------------------------------
   if(!is.null(allInputs$gel_picture)) {
     allInputs$gel_picture$new_datapath <-
       normalizePath(file.path(out_directory,

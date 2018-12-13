@@ -16,7 +16,9 @@ list of validation results
 performs a validation on databases input fields
 }
 \examples{
+\dontrun{
 validateDataBases(isolate(reactiveValuesToList(input)))
+}
 }
 \seealso{
 Validated

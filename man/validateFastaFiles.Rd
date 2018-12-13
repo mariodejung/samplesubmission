@@ -18,5 +18,7 @@ validates whether the files are valid fasta files
 uses read.fasta from seqinr to do that
 }
 \examples{
+\dontrun{
 validateFastaFiles("fasta_DB.fasta")
+}
 }

@@ -24,6 +24,8 @@ Creates a csv file with containing a summary of all fasta files found in the dir
 tries to extract species names from the file names
 }
 \examples{
+\dontrun{
 createSummaryFileOfFastaFiles()
 createSummaryFileOfFastaFiles("fasta_dir", "summary.csv", "(HUMAN|YEAST).*\\\\.fasta$")
+}
 }

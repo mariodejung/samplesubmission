@@ -1,11 +1,12 @@
 
 #' tries to determine an appropriate regex for Protein ID extraction from fasta headers
 #' on the basis of file names 
-#' @param fileName one or more(vector) file names
+#' @param file_name one or more(vector) file names
 #' @param default_pattern regex wich is used in case of no recognition
+#' @export
 #' @return a vector of regex
 #' @examples
-#' getProtIdRegexFromFileName(isolate(reactiveValuesToList(input)))
+#' getProtIdRegexFromFileName("Uniprot_Human_DB.fasta")
 getProtIdRegexFromFileName <- function(file_name, default_pattern= ">([^ ]+)") {
   
   db_names_to_patterns <- list(uniprot=">\\w+\\|([^ ]+)\\|",

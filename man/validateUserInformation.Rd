@@ -4,12 +4,10 @@
 \alias{validateUserInformation}
 \title{performs a validation on user infos fields}
 \usage{
-validateUserInformation(inputs, user_inputs_info_ids)
+validateUserInformation(inputs)
 }
 \arguments{
 \item{inputs}{isolated input list}
-
-\item{user_inputs_info_ids}{list of input filed ids}
 }
 \value{
 list of validation results
@@ -18,7 +16,9 @@ list of validation results
 performs a validation on user infos fields
 }
 \examples{
+\dontrun{
 validateUserInformation(isolate(reactiveValuesToList(input)))
+}
 }
 \seealso{
 Validated

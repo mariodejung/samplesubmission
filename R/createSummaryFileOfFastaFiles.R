@@ -7,9 +7,12 @@
 #' @return data frame with the summary
 #' @import readr
 #' @import stringr
+#' @importFrom  utils write.csv2
 #' @examples 
+#' \dontrun{
 #' createSummaryFileOfFastaFiles()
 #' createSummaryFileOfFastaFiles("fasta_dir", "summary.csv", "(HUMAN|YEAST).*\\.fasta$")
+#' }
 createSummaryFileOfFastaFiles <- function (fasta_files_path=".",
                                            out_file="Available_species_DBs.csv",
                                            file_name_pattern="\\.fasta$"){

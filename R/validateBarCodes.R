@@ -4,7 +4,9 @@
 #' @return list of validation results
 #' @seealso Validated
 #' @examples
+#' \dontrun{
 #' validateBarCodes(isolate(reactiveValuesToList(input)))
+#' }
 validateBarCodes <- function(inputs, pattern="^IMB_\\w+_\\d{3,5}$") {
   results <- list()
 

@@ -4,7 +4,9 @@
 #' @return list of validation results
 #' @seealso Validated
 #' @examples
+#' \dontrun{
 #' validateFastaInputs(isolate(reactiveValuesToList(input)))
+#' }
 validateFastaInputs <- function(inputs, input_ids= c("custom_species_db_file", "custom_background_db_file")){
 
   results <- list()

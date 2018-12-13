@@ -3,7 +3,9 @@
 #' @return list of validation results
 #' @seealso Validated
 #' @examples
+#' \dontrun{
 #' validateUserInformation(isolate(reactiveValuesToList(input)))
+#' }
 validateUserInformation <- function(inputs) {
   
   user_info_fields <- get('user_info_fields')

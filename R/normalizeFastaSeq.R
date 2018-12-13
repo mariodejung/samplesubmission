@@ -2,6 +2,7 @@
 #' replaces whitespaces with empty string in other lines
 #' @param sequence string containing sequences in fasta format
 #' @return modificated fasta string
+#' @export
 #' @examples
 #' normalizeFastaSeq(">Protein ID with spaces \n KDFSHGZWVBSZWHA  ADFHDJF\n")
 

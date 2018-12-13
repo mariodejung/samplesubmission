@@ -18,7 +18,9 @@ list of validation results
 performs a validation check on the barcodes fields
 }
 \examples{
+\dontrun{
 validateBarCodes(isolate(reactiveValuesToList(input)))
+}
 }
 \seealso{
 Validated

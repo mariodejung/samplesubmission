@@ -5,7 +5,9 @@
 #' @return a character vector of protein IDs
 #' @importFrom readr read_lines_chunked
 #' @examples
+#' \dontrun{
 #' extrProtIdsFromFasta("HUMAN_DB.fasta", ">([^ ]+)")
+#' }
 extrProtIdsFromFasta <- function(fasta_file, sub_pattern=NULL){
 
   if(is.na(fasta_file) || is.null(fasta_file)) return(NULL)

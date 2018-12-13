@@ -5,7 +5,9 @@
 #' @param name_replacement optional, new name for the html file
 #' @import shinyjs
 #' @examples
+#' \dontrun{
 #' showAndPrintHtmlFile("form.html", "tmp")
+#' }
 showAndPrintHtmlFile <- function(path, name_replacement=NULL){
 
   new_dir <- file.path("www", "tmp")

@@ -17,5 +17,7 @@ opens a new browser window or tab where the html will be loaded
 and tries to print it
 }
 \examples{
+\dontrun{
 showAndPrintHtmlFile("form.html", "tmp")
+}
 }

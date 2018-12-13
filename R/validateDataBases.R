@@ -3,7 +3,9 @@
 #' @return list of validation results
 #' @seealso Validated
 #' @examples
+#' \dontrun{
 #' validateDataBases(isolate(reactiveValuesToList(input)))
+#' }
 validateDataBases <- function(inputs) {
   
   

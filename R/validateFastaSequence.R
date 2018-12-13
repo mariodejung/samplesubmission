@@ -1,9 +1,10 @@
 #' validates a fasta sequence string
-#' @param sequence string containing one or more fasta sequences
+#' @param seqs string containing one or more fasta sequences
 #' @return logical, whether the file is a fasta file or NULL if file_path is NULL
 #' @import readr
+#' @export
 #' @examples
-#' validateFastaSequences(seqs)
+#' validateFastaSequences(">Protein ID with spaces \n KDFSHGZWVBSZWHA  ADFHDJF\n")
 validateFastaSequences <- function(seqs) {
 
   if(is.null(seqs) || seqs==''){

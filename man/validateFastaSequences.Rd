@@ -7,7 +7,7 @@
 validateFastaSequences(seqs)
 }
 \arguments{
-\item{sequence}{string containing one or more fasta sequences}
+\item{seqs}{string containing one or more fasta sequences}
 }
 \value{
 logical, whether the file is a fasta file or NULL if file_path is NULL
@@ -16,5 +16,5 @@ logical, whether the file is a fasta file or NULL if file_path is NULL
 validates a fasta sequence string
 }
 \examples{
-validateFastaSequences(seqs)
+validateFastaSequences(">Protein ID with spaces \\n KDFSHGZWVBSZWHA  ADFHDJF\\n")
 }

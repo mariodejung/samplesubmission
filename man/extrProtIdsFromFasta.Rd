@@ -18,5 +18,7 @@ a character vector of protein IDs
 tries to extract the protein IDs (located in fasta headers) from fasta file
 }
 \examples{
+\dontrun{
 extrProtIdsFromFasta("HUMAN_DB.fasta", ">([^ ]+)")
+}
 }

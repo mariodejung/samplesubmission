@@ -16,5 +16,7 @@ file paths corresponding to the databases names
 extracts databases file paths on the basis of selected databases in the form
 }
 \examples{
+\dontrun{
 getFilenamesFromDBnames("Human")
+}
 }

@@ -10,5 +10,7 @@ removeAllRequiredMarks()
 This function will remove all marks being set in markRequiredInput
 }
 \examples{
+\dontrun{
 removeAllReuiredMarks()
+}
 }
