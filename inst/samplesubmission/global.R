@@ -14,7 +14,7 @@ library(shinyjs)
 # package "V8" needed
 library(yaml)
 library(seqinr)
-library(cfpscripts)
+#library(cfpscripts)
 library(rmarkdown)
 library(pdftools)
 

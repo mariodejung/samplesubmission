@@ -29,13 +29,13 @@ apply_submit <- function(input,output, output_dir){
 
   output$message <- renderText("Validating user inputs...")
 
-  validation_results <- validateInputValues(allInputs)
+  validation_results <- samplesubmission:::validateInputValues(allInputs)
 
   result_valid=sapply(validation_results, function(result) result$valid)
 
   if(all(result_valid)) {
 
-    submitCompletedForm(allInputs, out_directory)
+    samplesubmission:::submitCompletedForm(allInputs, out_directory)
     output$message <- renderText("Validation succeeded!")
 
   } else {

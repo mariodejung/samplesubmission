@@ -84,9 +84,9 @@ submitCompletedForm <- function(allInputs, out_directory) {
 
 
   allInputs$species_dbs <- list(names=allInputs$species_dbs,
-                                paths=getFilenamesFromDBnames(allInputs$species_dbs))
+                                paths=samplesubmission:::getFilenamesFromDBnames(allInputs$species_dbs))
   allInputs$background_dbs <- list(names=allInputs$background_dbs,
-                                paths=getFilenamesFromDBnames(allInputs$background_dbs))
+                                paths=samplesubmission:::getFilenamesFromDBnames(allInputs$background_dbs))
   
 
 # enzymes summary ---------------------------------------------------------

@@ -16,11 +16,11 @@ validateInputValues <- function (inputs) {
   #message
 
   results <- c(
-    validateUserInformation(inputs),
-    validateDataBases(inputs),
-    validateBarCodes(inputs),
-    validateFastaInputs(inputs),
-    validateGeneralSettings(inputs)
+    samplesubmission:::validateUserInformation(inputs),
+    samplesubmission:::validateDataBases(inputs),
+    samplesubmission:::validateBarCodes(inputs),
+    samplesubmission:::validateFastaInputs(inputs),
+    samplesubmission:::validateGeneralSettings(inputs)
   )
 
 

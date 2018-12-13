@@ -6,7 +6,7 @@ Author: Timur Horn
 Maintainer: The package maintainer <timur.horn@stud.th-bingen.de>
 Description: 
   Provides a web interfece to create a Band Identification order
-  by filling out a form und then print it.
+  by filling out a form und then printing it.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
@@ -21,4 +21,6 @@ Imports:
   shinyjs,
   shinyBS,
   stringr,
-  yaml
+  yaml,
+  V8
+  
