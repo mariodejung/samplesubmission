@@ -2,6 +2,8 @@
 
 ui <- fluidPage(theme="style.css",
 
+  tags$script(src = "myscript.js"),
+  
   shinyjs::useShinyjs(), ##Mario adding package:: makes everything more robust but a lot of work!
   shinyjs::extendShinyjs(text=extend_js_code),
 
@@ -88,7 +90,7 @@ ui <- fluidPage(theme="style.css",
            shiny::selectInput(inputId="species_dbs", label="Databases:",
                               selectize=F, width="100%",
                               choices=species_dbs,
-                              multiple=T, size=length(species_dbs)),
+                              multiple=T, size=10),
 
            shiny::textInput(inputId="custom_species_db", label="Other:", width="5cm"),
            hidden( ##Mario does hidden make sense here? I would comment out the rows or does this has an advantage
@@ -104,7 +106,7 @@ ui <- fluidPage(theme="style.css",
            shiny::selectInput(inputId="background_dbs",label="Database:",
                               selectize=F, width="100%",
                               choices=background_dbs,
-                              multiple=F, size=length(background_dbs)),
+                              multiple=F, size=10),
            shiny::textInput(inputId="custom_background_db", label="Other:", width="5cm"),
            hidden(
              shiny::fileInput(inputId="custom_background_db_file",
@@ -179,6 +181,5 @@ ui <- fluidPage(theme="style.css",
 
 
   hr()
-
 
 )

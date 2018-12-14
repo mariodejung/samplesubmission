@@ -56,6 +56,10 @@ if(file.exists(config$db_summary_file)){
   available_dbs <- read.csv2(config$db_summary_file, stringsAsFactors=FALSE)
   species_dbs <- c("--none--", available_dbs$species_names)
   #print(species_dbs)
+}else{
+  createSummaryFileOfFastaFiles()
+  available_dbs <- read.csv2(config$db_summary_file, stringsAsFactors=FALSE)
+  species_dbs <- c("--none--", available_dbs$species_names)
 }
 
 background_dbs <- species_dbs
@@ -65,6 +69,7 @@ available_proteases <- config$available_proteases
 extend_js_code <- 'shinyjs.winopenAndPrint=function(url){
 myWindow=window.open(url, "_blank");
 myWindow.print()
-}'
+}
+'
 
 

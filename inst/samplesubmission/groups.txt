@@ -1,3 +1,0 @@
-IMB_EW	Eva Wolf
-IMB_BU	Falk Butter
-EXT_CF	External

@@ -27,7 +27,8 @@ createSummaryFileOfFastaFiles <- function (fasta_files_path=".",
   
   fasta_paths <- list.files(path=fasta_files_path,
                             pattern=file_name_pattern,
-                            full.names= TRUE)
+                            full.names= TRUE,
+                            ignore.case=TRUE)
   
   prot_count <- c()
   prot_names <- c()
@@ -48,7 +49,7 @@ createSummaryFileOfFastaFiles <- function (fasta_files_path=".",
   f <- function(x, pos) length(x[grepl('^>', x)])
   
   for(fasta_file in fasta_paths){
-    
+    print(fasta_file)
     
     prot_count <- c(prot_count,sum(unlist(
       readr::read_lines_chunked(fasta_file,

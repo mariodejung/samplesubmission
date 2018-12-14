@@ -4,8 +4,9 @@
 server <- function(input, output, session) {
 
   observeEvent(input$submit,{
+    tryCatch({
     samplesubmission:::apply_submit(input, output, orders_directory)
-
+    }, error=function(e){session$sendCustomMessage("error_occured", paste(e))})
   })
 
   observeEvent(input$testMark,{
@@ -13,9 +14,12 @@ server <- function(input, output, session) {
 
   })
 
-  #I have no idea why "paste" works here. Observe several inputs ##Mario looks dirty but you paste together all inputs into a single string. This string is changing ALLWAYS when any of the inputs change!
+  #I have no idea why "paste" works here. Observe several inputs 
+  ##Mario looks dirty but you paste together all inputs into a single string.
+  #This string is changing ALLWAYS when any of the inputs change!
   observeEvent({paste(input$species_dbs, input$custom_species_db_file)},
                {
+                 tryCatch({
                  #print(typeof(input$custom_species_db_file))
                  file_names <- samplesubmission:::getFilenamesFromDBnames(input$species_dbs)
 
@@ -32,6 +36,8 @@ server <- function(input, output, session) {
                  shiny::updateSelectizeInput(session, inputId="target_protein",
                                              choices=prot_ids, server=TRUE,
                                              selected=target_proteins)
+                 },
+                 error=function(e){session$sendCustomMessage("error_occured", paste(e))})
 
                })
 
