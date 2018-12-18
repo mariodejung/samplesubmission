@@ -12,6 +12,9 @@ submitCompletedForm(allInputs, out_directory)
 
 \item{out_directory}{directory where the outputs well be written to}
 }
+\value{
+file path to the completed form html and the corresponding web path
+}
 \description{
 gather all necessary inputs and uploaded files,
 enriches them if necessary and puts them in the output dir

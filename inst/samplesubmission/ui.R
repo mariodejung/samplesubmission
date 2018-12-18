@@ -29,7 +29,7 @@ ui <- fluidPage(theme="style.css",
     ##TODO credentials
     #shiny::actionButton(inputId="testMark", label="TEST MARK ELEMENTS"),
     column(12,
-           h3("User Informations"),
+           h3("User Information"),
            tags$div(class="userinfos",
                     # HTML(paste0(sapply(names(user_info_fields), function(field){
                     #         sprintf("%s",shiny::textInput(field, user_info_fields[[field]]))
@@ -66,15 +66,13 @@ ui <- fluidPage(theme="style.css",
            shiny::textInput(inputId="barcode_acid", label="Acid Hydrolysis",
                             placeholder="barcode format IMB_XX_9999"),
            tags$p(style="color:red", ##Mario this text needs to be adapted since we need up to 3 times the material for all proteases one amount
-                  "Please provide enough material(= two identical band but two
-                  different sticker numbers). One sample will be digested with
-                  trypsin and the other hydrolysed with 3M HCl")
+                  "Please provide enough material (one band per sample/barcode)")
     ),
     column(4,
            shiny::textInput(inputId="barcode_trypsin", label="Trypsin",
                             placeholder="barcode format IMB_XX_9999")),
     column(4,
-           shiny::selectizeInput(inputId="name_protease", label="Protease",
+           shiny::selectizeInput(inputId="name_protease", label="Additional protease",
                                  choices=available_proteases),
            shiny::textInput(inputId="barcode_protease", label="Barcode",
                             placeholder="barcode format IMB_XX_9999"))
@@ -87,12 +85,13 @@ ui <- fluidPage(theme="style.css",
     column(4,
            h3("Species"),
 
-           shiny::selectInput(inputId="species_dbs", label="Databases:",
+           tipify(shiny::selectInput(inputId="species_dbs", label="Databases",
                               selectize=F, width="100%",
                               choices=species_dbs,
-                              multiple=T, size=10),
+                              multiple=T, size=10), "Multiple choises are possible",
+                  placement="right"),
 
-           shiny::textInput(inputId="custom_species_db", label="Other:", width="5cm"),
+           shiny::textInput(inputId="custom_species_db", label="Other", width="5cm"),
            hidden( ##Mario does hidden make sense here? I would comment out the rows or does this has an advantage
              ##Timur by commenting out the code must be edited on other locations
              shiny::fileInput(inputId="custom_species_db_file",
@@ -103,11 +102,11 @@ ui <- fluidPage(theme="style.css",
     ),
     column(4,
            h3("Background"),
-           shiny::selectInput(inputId="background_dbs",label="Database:",
+           shiny::selectInput(inputId="background_dbs",label="Database",
                               selectize=F, width="100%",
                               choices=background_dbs,
                               multiple=F, size=10),
-           shiny::textInput(inputId="custom_background_db", label="Other:", width="5cm"),
+           shiny::textInput(inputId="custom_background_db", label="Other", width="5cm"),
            hidden(
              shiny::fileInput(inputId="custom_background_db_file",
                               label="or custom DB file",
@@ -116,7 +115,7 @@ ui <- fluidPage(theme="style.css",
     ),
     column(3,
            h3("Comments"),
-           shiny::textAreaInput(inputId="dbs_comments", label="Additional comments:",
+           shiny::textAreaInput(inputId="dbs_comments", label="Additional comments",
                                 height="200")
     )),
 
@@ -155,7 +154,7 @@ ui <- fluidPage(theme="style.css",
            shiny::textInput(inputId="modification", label="Modification",
                             placeholder="name"),
            shiny::fileInput(inputId="gel_picture", label="Gel picture",
-                            accept=c("image/jpeg","image/png"),
+                            accept=c("image/jpeg","image/png", "application/pdf"),
                             buttonLabel="Gel picture", multiple=F)
     ),
     column(3,
@@ -176,9 +175,14 @@ ui <- fluidPage(theme="style.css",
   hr(),
 
   verbatimTextOutput("message"),
-
-  shiny::actionButton(inputId="submit", label="Print"),
-
+  shiny::tags$div(id="buttons",
+    shiny::actionButton(inputId="submit", label="Print", class="button"),
+    shiny::uiOutput("link_placeholder", inline=TRUE),
+    shinyjs::hidden(
+      shiny::checkboxInput("changed_check", "Changed" , FALSE)
+    )
+    #shiny::tags$a(href="TEST.html", "Click here!"),
+  ),
 
   hr()
 

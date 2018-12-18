@@ -2,6 +2,7 @@
 #' enriches them if necessary and puts them in the output dir
 #' @param allInputs all isolated inputs
 #' @param out_directory directory where the outputs well be written to
+#' @return file path to the completed form html and the corresponding web path
 #' @import yaml
 #' @import png
 #' @import pdftools
@@ -125,5 +126,6 @@ submitCompletedForm <- function(allInputs, out_directory) {
   #   }
   # )
 
-  showAndPrintHtmlFile(form_output_file, allInputs$timestamp)
+  web_path <- showAndPrintHtmlFile(form_output_file, allInputs$timestamp)
+  return(c(form_output_file, web_path) )
 }

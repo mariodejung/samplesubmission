@@ -35,9 +35,16 @@ apply_submit <- function(input,output, output_dir){
 
   if(all(result_valid)) {
 
-    samplesubmission:::submitCompletedForm(allInputs, out_directory)
-    output$message <- renderText("Validation succeeded!")
-
+    web_path <- samplesubmission:::submitCompletedForm(allInputs, out_directory)[2]
+    output$message <- renderText(paste0("Validation succeeded",
+                                        "Please accept popups to view the document",
+                                        collapse="\n", sep="\n"))
+    output$link_placeholder <- renderUI(tagList(shiny::tags$a(href=web_path,
+                                                              "Show Form",
+                                                              class="button",
+                                                              target="_blank",
+                                                              class="btn btn-default shiny-bound-input")))
+    
   } else {
     output$message <-
       renderText(paste(collapse="\n",

@@ -52,5 +52,9 @@ server <- function(input, output, session) {
                  }
 
                })
+  observeEvent(input$changed_check, {
+    #print("BLBJLBLBLKJB")
+    output$link_placeholder <- renderUI(tags$pre(""))
+  })
   
 }

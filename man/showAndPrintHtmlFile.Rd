@@ -12,6 +12,9 @@ showAndPrintHtmlFile(path, name_replacement = NULL)
 
 \item{name_replacement}{optional, new name for the html file}
 }
+\value{
+html path relative to www directory
+}
 \description{
 opens a new browser window or tab where the html will be loaded
 and tries to print it

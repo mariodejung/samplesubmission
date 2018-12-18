@@ -68,7 +68,7 @@ available_proteases <- config$available_proteases
 
 extend_js_code <- 'shinyjs.winopenAndPrint=function(url){
 myWindow=window.open(url, "_blank");
-myWindow.print()
+myWindow.onload=function(){this.print()}
 }
 '
 

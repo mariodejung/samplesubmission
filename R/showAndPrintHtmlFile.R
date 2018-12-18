@@ -3,6 +3,7 @@
 #' @export
 #' @param path server path to a file
 #' @param name_replacement optional, new name for the html file
+#' @return html path relative to www directory 
 #' @import shinyjs
 #' @examples
 #' \dontrun{
@@ -23,5 +24,6 @@ showAndPrintHtmlFile <- function(path, name_replacement=NULL){
   #print(new_path)
   js_path <- sub(pattern="www.", "", new_path)
   js$winopenAndPrint(js_path)
+  return(js_path)
 
 }

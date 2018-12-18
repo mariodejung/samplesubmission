@@ -141,9 +141,7 @@ output:
 ```{r echo=FALSE, results='asis'}
 if(user_inputs$barcode_acid!=''){
   cat('
-<p style="color:red">__Please provide enough material(= two identical band but two 
-                  different sticker numbers). One sample will be digested with 
-                  trypsin and the other hydrolysed with 3M HCl__</p>')
+<p style="color:red">__Please provide enough material (one band per sample/barcode)__</p>')
 }
 
 ```
