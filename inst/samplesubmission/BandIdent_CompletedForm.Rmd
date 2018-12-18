@@ -49,11 +49,12 @@ output:
 
 
 <div class='header' style='width:100%;clear:both; display:block'>
-<img src='`r system.file('extdata','imb_logo.png', package='cfpscripts')`' style='width:25%; float:left' />
+
+<img src='`r system.file('samplesubmission','www','imb_logo.png', package='samplesubmission')`' style='width:25%; float:left' />
 <div class='titel' style='width:70%; float:right'>
 <p style='color:#0071BB; font-size:2.5em;text-align: center; margin:30px 0px 0px 0px;'>Proteomics Core Facility</p>
 <p style='color:#0071BB; font-size:2em; text-align:center; margin:0px 0px 0px 0px;'>Sample Submission sheet</p>
-<p style='float:right; '>`r user_inputs$timestamp`</p>
+<p style='float:right; '><pre>`r user_inputs$timestamp`</pre></p>
 
 </div>
 </div>  
@@ -68,6 +69,7 @@ output:
 **Phone:** `r user_inputs$phone`
 **Mail:** `r user_inputs$email`  
 **Billing:** `r user_inputs$billing`    
+**Affiliation:** `r user_inputs$affiliation`    
 
 
 ##SPECIES DATABASES 
@@ -82,7 +84,7 @@ output:
 **Custom DB file\:** `r paste(user_inputs$custom_species_db_file$name)`
 -->
 ##BACKGROUND (protein expression)
-**Background species:** `r paste(user_inputs$background_dbs,collapse=",",sep=", ") `
+**Background species:** `r paste(user_inputs$background_dbs$names,collapse=",",sep=", ") `
 
 
 **Custom background DB:**

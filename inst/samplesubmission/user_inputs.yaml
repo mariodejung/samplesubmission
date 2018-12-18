@@ -43,7 +43,7 @@ band_weight_kda: 50
 surname: Horn
 billing: ß012345
 custom_species_db_file: ~
-timestamp: 20181207_145654_Timur_Horn_IMB_EW
+timestamp: 20181207_145654_Timur_Horn_IMB_EW___TEST___
 enzymes:
 - AspN
 - Trypsin

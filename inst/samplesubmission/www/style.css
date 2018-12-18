@@ -1,5 +1,6 @@
 .userinfos > div.shiny-input-container{
   display: inline-block;
+  vertical-align: middle;
   width: 4cm ;
   
 }
@@ -47,4 +48,12 @@ h3 {
   font-size: 1.2em;
   font-weight: bold;
   color: red;
+}
+
+
+input[type="number"]:in-range {
+	background-color: #b8e0b3;
+}
+input[type="number"]:out-of-range {
+	background-color: #e0b3b3;
 }
