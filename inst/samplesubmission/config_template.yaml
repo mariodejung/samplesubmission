@@ -1,0 +1,19 @@
+orders_directory: ./outputs
+maximum_upload_megabytes: 40.0
+user_inputs_file_name: user_inputs.yaml
+available_groups:
+  IMB_EW: Eva Wolf
+  IMB_EL: Edward Lemke
+  IMB_RK: Rene Ketting
+  IMB_PB: Peter Baumann
+  IMB_FB: Falk Butter
+  IMB_HU: Helle Ulrich
+  EXT_CF: External
+  
+db_summary_file: Available_species_DBs.csv
+available_proteases:
+- undefined
+- AspN
+- GluC
+- LysC
+- Chymotrypsin
