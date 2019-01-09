@@ -2,7 +2,7 @@
 
 h2, h3{
     background-color: silver;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #stickers table {
@@ -17,13 +17,13 @@ h2, h3{
 }
 
 #stickers th{
-   padding: 0.5cm;
-   font-size: 1.5em
+   padding: 0.3cm;
+   font-size: 1.4em
 }
 
 #stickers tr:last-child td{
    padding: 0.1cm;
-   font-size: 1.5em
+   font-size: 1.2em
 }
 
 #stickers tr:first-child span{
@@ -71,6 +71,18 @@ button {
   
 }
 
+#for_internal_use{
+  border: 2px;
+  border-style: solid;
+  padding: 5px 5px 1.5cm 5px;
+  background-color: silver !important;
+  
+}
+
+#for_internal_use table *{
+  padding: 6px;
+}
+
 @page {
   size: A4;
   margin: 2cm;
@@ -87,7 +99,7 @@ button {
   }
   h2, h3{
     -webkit-print-color-adjust: exact;
-    font-size: 1.3em;
+    font-size: 1em;
     margin-top:0.2cm;
     background-color: silver;
     background-clip: padding-box;
@@ -106,5 +118,6 @@ button {
   .p_invisible{
     display: none;
   }
+  
   /* ... the rest of the rules ... */
 }
