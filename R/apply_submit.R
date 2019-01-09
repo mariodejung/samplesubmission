@@ -14,13 +14,15 @@ apply_submit <- function(input,output, output_dir){
   #create output directory name
   directory_name <- format(Sys.time(), "%Y%m%d_%H%M%S")
   directory_name <-
-    paste(directory_name, allInputs$firstname, allInputs$surname, allInputs$group,
+    paste(directory_name,
+          #allInputs$firstname,
+          #allInputs$surname,
+          allInputs$group,
           sep="_")
   directory_name <- gsub("\\s+", "_", directory_name)
   
-  barcodes <- paste0(allInputs[grep("barcode", names(allInputs))],
-                     collapse="_", sep="_")
-  directory_name <- paste0(directory_name, barcodes, collapse="_", sep="_")
+  barcodes <- paste(allInputs[grep("barcode", names(allInputs))], collapse="_")
+  directory_name <- paste(directory_name, barcodes, sep="_")
   
   out_directory <- file.path(output_dir, directory_name)
 
@@ -36,7 +38,7 @@ apply_submit <- function(input,output, output_dir){
   if(all(result_valid)) {
 
     web_path <- samplesubmission:::submitCompletedForm(allInputs, out_directory)[2]
-    output$message <- renderText(paste0("Validation succeeded",
+    output$message <- renderText(paste0("Validation succeeded. ",
                                         "Please accept popups to view the document",
                                         collapse="\n", sep="\n"))
     output$link_placeholder <- renderUI(tagList(shiny::tags$a(href=web_path,
@@ -44,6 +46,18 @@ apply_submit <- function(input,output, output_dir){
                                                               class="button",
                                                               target="_blank",
                                                               class="btn btn-default shiny-bound-input")))
+    if(getOption("samplesubmission.send_email", FALSE)){
+      mailR::send.mail(from="\"CF Proteomics\" <proteomics@imb.de>",
+                       to=c(allInputs$email),
+                       subject=sprintf("Band Identification: $s", allInputs$timestemp),
+                       body='check attached files\n',
+                       smtp=list(from="\"CF Proteomics\" <proteomics@imb.de>",
+                                 host.name="mailgate.zdv.uni-mainz.de",
+                                 port=25),
+                       authenticate=FALSE,
+                       attach.files=file.path("www", web_path),
+                       send=TRUE)
+    }
     
   } else {
     output$message <-

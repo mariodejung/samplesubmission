@@ -24,11 +24,18 @@ validateBarCodes <- function(inputs, pattern="^IMB_\\w+_\\d{3,5}$") {
                                                   message='At least one enzyme needed')
       
     }else{
-      for(barcode in c("barcode_acid", "barcode_trypsin", "barcode_protease")){
-        if(inputs[barcode]!='' && !grepl(pattern, inputs[barcode])){
+      barcodes <- grep("barcode", names(inputs), value=TRUE)
+      barcodes_filt <- barcodes[inputs[barcodes] != '']
+      for(barcode in barcodes_filt){
+        if( !grepl(pattern, inputs[barcode])){
           results[[length(results) + 1]] <- Validated(barcode,
                                                       valid=FALSE,
                                                       message='Don\'t meet the required format')
+        }
+        if(sum(match(inputs[barcodes_filt], inputs[barcode], nomatch=0))>1){
+          results[[length(results) + 1]] <- Validated(barcode,
+                                                      valid=FALSE,
+                                                      message='Barcode used twice')
         }
       }
     }

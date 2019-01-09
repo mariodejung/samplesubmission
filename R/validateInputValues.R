@@ -18,7 +18,7 @@ validateInputValues <- function (inputs) {
   results <- c(
     samplesubmission:::validateUserInformation(inputs),
     samplesubmission:::validateDataBases(inputs),
-    samplesubmission:::validateBarCodes(inputs),
+    samplesubmission:::validateBarCodes(inputs, pattern=paste0("^", inputs$group, "_\\d{3,5}$")),
     samplesubmission:::validateFastaInputs(inputs),
     samplesubmission:::validateGeneralSettings(inputs)
   )

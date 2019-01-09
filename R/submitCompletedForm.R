@@ -26,17 +26,22 @@ submitCompletedForm <- function(allInputs, out_directory) {
     file.copy(allInputs$gel_picture$datapath, allInputs$gel_picture$new_datapath)
     #extract fist page from pdf as image
     if(grepl("\\.pdf$", allInputs$gel_picture$new_datapath)){
-      bitmap <- pdf_render_page(allInputs$gel_picture$new_datapath, page = 1, dpi= 144)
+      img <- pdf_render_page(allInputs$gel_picture$new_datapath, page = 1, dpi= 144)
       allInputs$gel_picture$new_datapath <- sub("pdf$", "png",
                                                 allInputs$gel_picture$new_datapath)
-      png::writePNG(bitmap, allInputs$gel_picture$new_datapath)
+      png::writePNG(img, allInputs$gel_picture$new_datapath)
+    }
+    #TODO perhaps magick package should be used to cover most image formates
+    if(grepl("\\.tif+$", allInputs$gel_picture$new_datapath)){
+      img <- readTIFF(allInputs$gel_picture$new_datapath, native=TRUE)
+      allInputs$gel_picture$new_datapath <- sub("tif+$", "jpeg",
+                                                allInputs$gel_picture$new_datapath)
+      jpeg::writeJPEG(img, allInputs$gel_picture$new_datapath, quality=0.8)
     }
   }
   
-
 # Copy custom DBs, will not used--------------------------------------------------
 
-  
   db_out_directory <- file.path(out_directory, "Custom_DB")
   if(!dir.exists(db_out_directory)) dir.create(db_out_directory)
   if(!is.null(allInputs$custom_species_db_file)) {
@@ -58,7 +63,6 @@ submitCompletedForm <- function(allInputs, out_directory) {
               allInputs$custom_background_db_file$new_datapath)
   }
   
-
 # Custom sequence processing ----------------------------------------------
 
   if(allInputs$fasta_sequence!='') {
@@ -78,29 +82,20 @@ submitCompletedForm <- function(allInputs, out_directory) {
     allInputs$fasta_sequence <- list(content="No custom sequence(s) uploaded",
                                      path=NULL)
   }
-
   
-
 # databases summary -------------------------------------------------------
-
 
   allInputs$species_dbs <- list(names=allInputs$species_dbs,
                                 paths=samplesubmission:::getFilenamesFromDBnames(allInputs$species_dbs))
   allInputs$background_dbs <- list(names=allInputs$background_dbs,
                                 paths=samplesubmission:::getFilenamesFromDBnames(allInputs$background_dbs))
-  
 
-# enzymes summary ---------------------------------------------------------
+# enzyme barcode summary ---------------------------------------------------------
+ 
+  allInputs$barcodes <- samplesubmission:::summarizeBarcodes(allInputs)
+  
+# write file --------------------------------------------------------------
 
-  enzymes = c()
-  if(allInputs$barcode_protease!='') enzymes <- allInputs$name_protease
-  
-  if(allInputs$barcode_trypsin!='') enzymes <- c(enzymes, "Trypsin/P")
-  if(allInputs$barcode_acid!='') enzymes <- c(enzymes, "Acid")
-  
-  allInputs$enzymes <- enzymes
-  
-  
   yaml::write_yaml(allInputs,file.path(out_directory, user_inputs_file_name))
 
   form_output_file <- file.path(out_directory, "CompletedForm.html")
@@ -108,23 +103,6 @@ submitCompletedForm <- function(allInputs, out_directory) {
   rmarkdown::render(input="BandIdent_CompletedForm.Rmd",
                     knit_root_dir=out_directory, output_dir=out_directory,
                     output_file=form_output_file)
-
-
-  # insertUI(
-  #   selector="#submit",
-  #   where="afterEnd",
-  #   ui=tags$div(style="display: inline-block;",
-  #                 downloadButton("form_download", label="Download Form"))
-  # )
-  #
-  #
-  #
-  # output$form_download <- downloadHandler(
-  #   filename=paste(directory_name, "Form.html", sep=""),
-  #   content=function(file) {
-  #     file.copy(form_output_file, file)
-  #   }
-  # )
 
   web_path <- showAndPrintHtmlFile(form_output_file, allInputs$timestamp)
   return(c(form_output_file, web_path) )

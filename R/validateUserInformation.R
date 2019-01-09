@@ -25,6 +25,12 @@ validateUserInformation <- function(inputs) {
                                                   message='Field is OK')
     }
   }
+  #email validation
+  if(!grepl("\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>", inputs$email, ignore.case=TRUE)){
+    results[[length(results) + 1]] <- Validated("email",
+                                                valid=FALSE,
+                                                message='Wrong email format')
+  }
   
   if(inputs$group == ''){
     results[[length(results) + 1]] <- Validated("group", "Please specify a group")

@@ -10,6 +10,7 @@ validateFastaSequences <- function(seqs) {
   if(is.null(seqs) || seqs==''){
     return(TRUE)
   }else{
+    seqs <- paste0(seqs,"\n")
     tmp=tempfile()
     write_file(seqs, path=tmp)
     return(validateFastaFiles(tmp))

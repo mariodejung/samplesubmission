@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MaxQuantParams xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <fastaFiles>
-      ##__fastaFiles_##
+      ##__fastaFiles__##
    </fastaFiles>
    <fastaFilesProteogenomics>
    </fastaFilesProteogenomics>
@@ -114,7 +114,7 @@
    <emailAddress></emailAddress>
    <smtpHost></smtpHost>
    <emailFromAddress></emailFromAddress>
-   <fixedCombinedFolder></fixedCombinedFolder>
+   <fixedCombinedFolder>##__fixedFolder__##</fixedCombinedFolder>
    <fullMinMz>-1.79769313486232E+308</fullMinMz>
    <fullMaxMz>1.79769313486232E+308</fullMaxMz>
    <sendEmail>False</sendEmail>
@@ -125,7 +125,7 @@
    <showIsotopeMassDifferences>False</showIsotopeMassDifferences>
    <useDotNetCore>False</useDotNetCore>
    <filePaths>
-      ##__rowFiles__##
+      ##__rawFiles__##
    </filePaths>
    <experiments>
       ##__experiment__##
@@ -140,7 +140,7 @@
       ##__Group_Indices__##
    </paramGroupIndices>
    <referenceChannel>
-      <string></string>
+      ##__referenceChannel__##
    </referenceChannel>
    <parameterGroups>
       ##__Parameter_Groups__##

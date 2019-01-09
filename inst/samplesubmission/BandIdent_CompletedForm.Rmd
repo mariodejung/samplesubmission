@@ -102,7 +102,7 @@ output:
 ##STAINING
   **`r paste(user_inputs$staining)`**
 
-##BAND IDENTIFACATION
+##BAND IDENTIFiCATION
 
 **Protein(s) of interest:** `r paste(user_inputs$target_protein, sep=",")`
 
@@ -146,10 +146,15 @@ if(user_inputs$barcode_acid!=''){
 
 ```
 ```{r  echo=FALSE, comment=NA, results='asis'}
-  var_to_readable = list("barcode_acid"="Acid Hydrolysis",
+  var_to_readable_tmp = list("barcode_acid"="Acid Hydrolysis",
                   "barcode_trypsin"="Trypsin",
                   "barcode_protease"=user_inputs$name_protease)
-  var_to_readable <- var_to_readable[grep(".",user_inputs[names(var_to_readable)])]
+  var_to_readable <- var_to_readable_tmp[grep(".",user_inputs[names(var_to_readable_tmp)])]
+  
+  if(length(var_to_readable)==0){
+    var_to_readable <- var_to_readable_tmp
+    var_to_readable$barcode_protease <- "Other"
+  } 
   
   df=t(data.frame(
     # variables=grep('barcode_', names(user_inputs), value=TRUE),
@@ -159,12 +164,51 @@ if(user_inputs$barcode_acid!=''){
     row.names=unlist(var_to_readable)
   ))
   rownames(df)=NULL
+  #will not used. df is always > 0
   if(length(df) > 0){
-    knitr::kable(df, format="markdown", align='c', escape=FALSE)
+    knitr::kable(df, format="html", align='c', escape=FALSE)
   }else{
     cat("__NO BARCODES ENTERED__")
   }
 ```
+</div>
+
+<div id="for_internal_use" class="unbreakable" width="100%">
+<h4>INTERNAL</h4>
+<table style="width:100%">
+<tbody>
+<tr>
+  <td>Sample received</td>
+  <td>Sample processed</td>
+  <td>Sample measured</td>
+</tr>
+<tr>
+  <td>RAW file</td>
+</tr>
+<tr>
+  <td>RAW file</td>
+</tr>
+<tr>
+  <td>MaxQuant</td>
+  <td>Modified settings</td>
+  <td>Comments</td>
+</tr>
+<tr>
+  <td></td>
+  <td>O Acetyl(Protein N-term)</td>
+  <td></td>
+</tr>
+<tr>
+  <td></td>
+  <td>O Oxidation (M)</td>
+  <td></td>
+</tr>
+
+<tr> </tr>
+<tr> </tr>
+
+</tbody>
+</table> 
 </div>
 
 </div> 

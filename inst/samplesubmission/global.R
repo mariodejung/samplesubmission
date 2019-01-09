@@ -17,6 +17,9 @@ library(seqinr)
 #library(cfpscripts)
 library(rmarkdown)
 library(pdftools)
+library(tiff)
+library(jpeg)
+library(mailR)
 
 library(samplesubmission)
 
@@ -55,12 +58,14 @@ species_dbs <-
 if(file.exists(config$db_summary_file)){
   available_dbs <- read.csv2(config$db_summary_file, stringsAsFactors=FALSE)
   species_dbs <- c("--none--", available_dbs$species_names)
-  #print(species_dbs)
 }else{
   createSummaryFileOfFastaFiles()
   available_dbs <- read.csv2(config$db_summary_file, stringsAsFactors=FALSE)
   species_dbs <- c("--none--", available_dbs$species_names)
 }
+
+names(species_dbs) <- c("--none--", paste0(available_dbs$species_names,
+                             " (", available_dbs$prot_count,")"))
 
 background_dbs <- species_dbs
 

@@ -22,5 +22,8 @@ Imports:
   shinyBS,
   stringr,
   yaml,
-  V8
+  V8,
+  tiff,
+  jpeg,
+  mailR
   

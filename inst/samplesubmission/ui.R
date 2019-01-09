@@ -29,7 +29,7 @@ ui <- fluidPage(theme="style.css",
     ##TODO credentials
     #shiny::actionButton(inputId="testMark", label="TEST MARK ELEMENTS"),
     column(12,
-           h3("User Information"),
+           h3("Contact Information"),
            tags$div(class="userinfos",
                     # HTML(paste0(sapply(names(user_info_fields), function(field){
                     #         sprintf("%s",shiny::textInput(field, user_info_fields[[field]]))
@@ -40,7 +40,7 @@ ui <- fluidPage(theme="style.css",
 
                     shiny::selectInput("group", "Group", selectize=FALSE,
                                        choices=c("", names(available_groups))),
-                    shiny::textAreaInput("affiliation", "Affiliation", cols=3)
+                    shiny::textAreaInput("affiliation", "Billing address (if external)", cols=3)
 
                     ##Mario also commented below, these fields should be created with a list since you will use ALL these names again for validation.
                     ##Mario maybe you can also add the validation to the list as well as width
@@ -61,6 +61,9 @@ ui <- fluidPage(theme="style.css",
   # Barcode section ---------------------------------------------------------
 
   h3("Digestion"),
+  shiny::tags$p(paste0("Each sample will be treated with one or more proteases listed below. ",
+                       "The standard treatment will be proceeded with trypsin. ",
+                       "Therefore provide a barcode for each protease(or acid)")),
   fluidRow(
     column(4,
            shiny::textInput(inputId="barcode_acid", label="Acid Hydrolysis",
@@ -85,13 +88,13 @@ ui <- fluidPage(theme="style.css",
     column(4,
            h3("Species"),
 
-           tipify(shiny::selectInput(inputId="species_dbs", label="Databases",
+           tipify(shiny::selectInput(inputId="species_dbs", label="Databases (multiple)",
                               selectize=F, width="100%",
                               choices=species_dbs,
                               multiple=T, size=10), "Multiple choises are possible",
                   placement="right"),
 
-           shiny::textInput(inputId="custom_species_db", label="Other", width="5cm"),
+           shiny::textInput(inputId="custom_species_db", label="Other species", width="5cm"),
            hidden( ##Mario does hidden make sense here? I would comment out the rows or does this has an advantage
              ##Timur by commenting out the code must be edited on other locations
              shiny::fileInput(inputId="custom_species_db_file",
@@ -101,12 +104,12 @@ ui <- fluidPage(theme="style.css",
            )
     ),
     column(4,
-           h3("Background"),
+           h3("Expression background"),
            shiny::selectInput(inputId="background_dbs",label="Database",
                               selectize=F, width="100%",
                               choices=background_dbs,
                               multiple=F, size=10),
-           shiny::textInput(inputId="custom_background_db", label="Other", width="5cm"),
+           shiny::textInput(inputId="custom_background_db", label="Other species", width="5cm"),
            hidden(
              shiny::fileInput(inputId="custom_background_db_file",
                               label="or custom DB file",
@@ -142,24 +145,25 @@ ui <- fluidPage(theme="style.css",
              title="<b>Usage:</b>", content=paste("Use the standard fasta format",
                                                   "<b>No whitespaces in sequence and we recommend no whitespace in names.</b>",
                                                   "Example:",
-                                                  ">ProteinXY_SpeciesZ_FunctionW...",
+                                                  ">ProteinXY_SpeciesZ_FunctionW",
                                                   "QSGAGNNWAKGHYTEGAELVDQVLDV...",
                                                   ">ProteinABC_SP....",
                                                   "WAKGHYTEGAEL..."),
              placement="right", trigger="hover")
     ),
     column(4, ##Mario so many!!!! spaces... :-(
-           shiny::textInput(inputId="protease", label="Protease",
+           shinyBS::tipify(shiny::textInput(inputId="protease", label="Additional protease",
                             placeholder="used in case of partial digestion"),
+                           "Was the sample treated with any proteases?"),
            shiny::textInput(inputId="modification", label="Modification",
                             placeholder="name"),
            shiny::fileInput(inputId="gel_picture", label="Gel picture",
-                            accept=c("image/jpeg","image/png", "application/pdf"),
+                            accept=c("image/jpeg","image/png", "application/pdf", "image/tiff"),
                             buttonLabel="Gel picture", multiple=F)
     ),
     column(3,
            h3("Comments"),
-           shiny::textAreaInput(inputId="bandIdent_comments", label="Additional comments:",
+           shiny::textAreaInput(inputId="bandIdent_comments", label="Additional comments",
                                 height="200")
     )
   ),

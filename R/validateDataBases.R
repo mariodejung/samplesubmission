@@ -14,13 +14,17 @@ validateDataBases <- function(inputs) {
     results[[length(results) + 1]] <- Validated("species_dbs",
                                                 valid=FALSE,
                                                 message='No species database chosen')
-  }
-  else{
+  }else{
     results[[length(results) + 1]] <- Validated("species_dbs",
                                                 valid=TRUE,
                                                 message=paste(inputs$species_dbs))
   }
   
+  if(inputs$background_dbs!="--none--" && any(inputs$species_dbs %in% inputs$background_dbs)){
+    results[[length(results) + 1]] <- Validated("background_dbs",
+                                                valid=FALSE,
+                                                message="Same species as in species DB chosen")
+  }
   
 
 # Sequence ----------------------------------------------------------------

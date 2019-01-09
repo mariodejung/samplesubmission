@@ -1,50 +1,61 @@
 target_protein:
-- G5EDF7
-- P45963
-- asdf
-name_protease: AspN
+- P22770
+- P08023
+- P05094-2
+- dfasdf
+- TPROERR
+- PROT2_asdkfj_daskdfj
+name_protease: LysC
 dbs_comments: ''
-barcode_protease: asdf bar
-barcode_acid: asdf
+barcode_protease: IMB_EW_0282
+barcode_acid: IMB_EW_0280
 custom_species_db: ''
-bandIdent_comments: asdf
+bandIdent_comments: ''
 group: IMB_EW
 name_protease-selectized: ''
-modification: dfasdf
+changed_check: yes
+modification: ''
 affiliation: ''
-testMark: 0
 background_dbs:
   names: Arabidopsis thaliana (ARATH)
-  paths: C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Arabidopsis_thaliana_(ARATH)_Uniprot_20180108.fasta
+  paths: C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\Arabidopsis_thaliana_(ARATH)_Uniprot_20180108.fasta
 custom_background_db_file: ~
-barcode_trypsin: tryp bar
+barcode_trypsin: IMB_EW_0281
 staining: Coomassie
 custom_background_db: ''
-gel_picture: ~
+gel_picture:
+  name: Trp88.tiff
+  size: 535747
+  type: image/tiff
+  datapath: C:\Users\imb30\AppData\Local\Temp\RtmpWa9QDd/3150ec8969238323f3c7a207/0.tiff
+  new_datapath: C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\MQ\20190107_160919_IMB_EWIMB_EW_0282\submission\Gel_picture.jpeg
 fasta_sequence:
-  content: ~
-  path: ~
-firstname: Timur
-target_protein-selectized: asdf
-submit: 1
-email: 1ß2348
+  content: Custom Sequence(s) uploaded
+  path: C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\outputs\20190107_160919_IMB_EWIMB_EW_0282__IMB_EW_0280__IMB_EW_0281__\Custom_DB\custom_seq.fasta
+firstname: Horn
+target_protein-selectized: dfasdf
+submit: 2
+email: t.h@gm.de
 protease: ''
-phone: 23ß4
+phone: alskdjf
 species_dbs:
   names:
-  - Caenorhabditis elegans (CAEEL)
   - Gallus gallus (CHICKEN)
+  - Kluyveromyces lactis_(Milchhefe)_NCBI_(ASM251v1)_20180813.fasta
   - Platynereis dumerilii
+  - Saccharomyces cerevisiae (YEAST) ATCC_204508
   paths:
-  - C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Caenorhabditis_elegans_(CAEEL)_Uniprot_20170123.fasta
-  - C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Gallus_gallus_(CHICKEN)_Uniprot_20180108.fasta
-  - C:\Users\imb30\Documents\Praktikum\Band_Ident_Forms\Platynereis_dumerilii_Uniprot_20170123.fasta
-band_weight_kda: 50
-surname: Horn
-billing: ß012345
+  - C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\Gallus_gallus_(CHICKEN)_Uniprot_20180108.fasta
+  - C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\Kluyveromyces
+    lactis_(Milchhefe)_NCBI_(ASM251v1)_20180813.fasta
+  - C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\Platynereis_dumerilii_Uniprot_20170123.fasta
+  - C:\Users\imb30\Documents\Praktikum\samplesubmission\inst\samplesubmission\Saccharomyces_cerevisiae_(YEAST)_Uniprot_(strain_ATCC_204508)_20180108.fasta
+band_weight_kda: 10
+surname: Timur
+billing: aksdf
 custom_species_db_file: ~
-timestamp: 20181207_145654_Timur_Horn_IMB_EW___TEST___
-enzymes:
-- AspN
-- Trypsin
-- Acid
+timestamp: 20190107_160919_IMB_EWIMB_EW_0282__IMB_EW_0280__IMB_EW_0281__
+barcodes:
+  LysC: IMB_EW_0282
+  Trypsin/P: IMB_EW_0281
+  Acid: IMB_EW_0280
