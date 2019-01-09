@@ -8,7 +8,7 @@ raw_files_dir <- file.path("test_gather")
 summary_dir <- file.path("MQ")
 mqpar_template_path <- "mqpar.tmp.xml"
 
-flag_file_name <- "approved"
+flag_file_name <- "approved.txt"
 
 raw_file_age <- 30 # in days
 file_size_filter <- 5000 # in bytes
@@ -25,13 +25,10 @@ raw_files <- list.files(raw_files_dir, pattern="[A-Z]{3}_\\w+\\d+.*_BI_.*\\.raw"
 indices <- which(file.size(raw_files)>file_size_filter &
                    difftime(current_time, file.mtime(raw_files), units="days") < raw_file_age)
 raw_files <- raw_files[indices]
-
 bar_codes <- str_extract(raw_files, barcode_extract_pattern)
 indices <- which(!is.na(bar_codes))
-
 bar_codes <- bar_codes[indices]
 raw_files <- raw_files[indices]
-
 
 # search for submission_dirs --------------------------------------------------
 for(barcode in bar_codes){

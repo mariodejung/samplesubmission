@@ -23,14 +23,10 @@ library(mailR)
 
 library(samplesubmission)
 
-##Mario General ToDo
-##Mario * we should create an extra package for the GUI, fancy names could be fouRS for Shiny Sample Submission Sheet :) but it reminds me on the iPhone 4S joke saying iPhone for Ass :-)
-##Mario * Swithcing to package, we split code into ui.R, server.R and global.R files. All functions go in individual files into R folder
-##Mario * add documentation to functions, shouldn't be much but roughly telling what they do and what they return
-##Mario * recommended but not mendatory, add the package to the related function, e.g. shinyjs::useShinyjs()
+config_file <- "config.yaml"
 
-
-config <- yaml::read_yaml("config.yaml")
+if(!file.exists(config_file)) file.copy("config_template.yaml", config_file)
+config <- yaml::read_yaml(config_file)
 
 #Output directory for all orders
 orders_directory <- config$orders_directory
@@ -76,5 +72,3 @@ myWindow=window.open(url, "_blank");
 myWindow.onload=function(){this.print()}
 }
 '
-
-
