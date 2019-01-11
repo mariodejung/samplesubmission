@@ -6,7 +6,13 @@ server <- function(input, output, session) {
   observeEvent(input$submit,{
     tryCatch({
     samplesubmission:::apply_submit(input, output, orders_directory)
-    }, error=function(e){session$sendCustomMessage("error_occured", paste(e))})
+    }, error=function(e){
+      if(getOption("samplesubmission.errors_to_client", FALSE)){
+        session$sendCustomMessage("error_occured", paste(e))
+      }else{
+        stop(e) 
+      }
+    })
   })
 
   observeEvent(input$testMark,{
@@ -37,7 +43,15 @@ server <- function(input, output, session) {
                                              choices=prot_ids, server=TRUE,
                                              selected=target_proteins)
                  },
-                 error=function(e){session$sendCustomMessage("error_occured", paste(e))})
+                 error=function(e){
+                   if(getOption("samplesubmission.errors_to_client", FALSE)){
+                      session$sendCustomMessage("error_occured", paste(e))
+                   }else{
+                      stop(e) 
+                   }
+                   
+                   }
+                 )
 
                })
 

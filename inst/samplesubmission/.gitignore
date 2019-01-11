@@ -1,3 +1,5 @@
 outputs
 mqpar_trypsin.xml
 mqpar_acid.xml
+createMQParFile.R
+user_inputs.yaml

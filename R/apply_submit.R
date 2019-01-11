@@ -21,7 +21,7 @@ apply_submit <- function(input,output, output_dir){
           sep="_")
   directory_name <- gsub("\\s+", "_", directory_name)
   
-  barcodes <- paste(allInputs[grep("barcode", names(allInputs))], collapse="_")
+  barcodes <- paste(allInputs[grep("barcode", names(allInputs))], collapse="_", sep="")
   directory_name <- paste(directory_name, barcodes, sep="_")
   
   out_directory <- file.path(output_dir, directory_name)

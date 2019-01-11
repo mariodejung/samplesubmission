@@ -22,7 +22,7 @@ showAndPrintHtmlFile <- function(path, name_replacement=NULL){
   }
   file.copy(path, new_path)
   #print(new_path)
-  js_path <- sub(pattern="www.", "", new_path)
+  js_path <- sub(pattern="^www.", "", new_path)
   js$winopenAndPrint(js_path)
   return(js_path)
 

@@ -1,24 +1,44 @@
+
+###############################################################################
+#
+# Script for automatic summary and preparation of a band identification order 
+#
+# Searches for raw files with a determined minimal size and age range, and for ther
+# appropriate approved submissions. If all files for a approved submission are
+# available they will be sumarized (moved/copied) into a new directory.  
+# Additionally the script creates the configuration files for MaxQuant containing 
+# all neccessary settings
+#
+# developer: Timur Horn
+# version: 0.1.0
+# date: 2019-01-10
+#
+# 
+###############################################################################
+
+
 library(stringr)
 library(readr)
 library(samplesubmission)
 
 submissions_dir <- file.path("outputs")
 raw_files_dir <- file.path("Y:", "CFP", "2018")
-raw_files_dir <- file.path("test_gather")
 summary_dir <- file.path("MQ")
 mqpar_template_path <- "mqpar.tmp.xml"
 
 flag_file_name <- "approved.txt"
 
 raw_file_age <- 30 # in days
-file_size_filter <- 5000 # in bytes
-current_time = Sys.time()
-
+file_size_filter <- 5000000 # in bytes
 barcode_extract_pattern <- "[A-Z]{3}_[A-Z]{2}_\\d{3,5}"
+
+
+current_time = Sys.time()
 
 # search for raw files ----------------------------------------------------
 
-raw_files <- list.files(raw_files_dir, pattern="[A-Z]{3}_\\w+\\d+.*_BI_.*\\.raw",
+raw_files <- list.files(raw_files_dir,
+                        pattern=paste0(barcode_extract_pattern, ".*\\.raw$"),
                         ignore.case=TRUE, full.names=TRUE)
 #raw_files_info <- file.info(raw_files, extra_cols=FALSE)
 #filter files
