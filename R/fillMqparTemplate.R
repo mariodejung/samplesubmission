@@ -13,8 +13,9 @@
 fillMqparTemplate <- function (parameterGroups,
                                fastaFiles,
                                rawFiles=NULL,
-                               templateFile="mqpar.tmp.xml",
-                               fixedFolder=''){
+                               templateFile="mqpar.tmp.old.xml",
+                               fixedFolder='',
+                               old_version=TRUE){
   template <- readLines(templateFile)
   parameterGroup_string <- 
     "<parameterGroup>
@@ -168,6 +169,10 @@ fillMqparTemplate <- function (parameterGroups,
                         <modificationParseRule></modificationParseRule>
                         <taxonomyId></taxonomyId>
                         </FastaFileInfo>", collapse="\n")
+  
+  if(old_version){
+    fasta_paths <- paste0("<string>", fasta_paths, " </string>", collapse="\n")
+  }
   
   template <- sub("##__Parameter_Groups__##", par_groups, template)
   template <- sub("##__Group_Indices__##", group_indices, template)

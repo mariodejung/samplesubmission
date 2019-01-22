@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <MaxQuantParams xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" aifSilWeight="4" aifIsoWeight="2" aifTopx="20" aifCorrelation="0.47" aifCorrelationFirstPass="0.8" aifMinMass="0" aifMsmsTol="10" aifSecondPass="true" aifIterative="true" aifThresholdFdr="0.01" writeMsScansTable="true" writeMsmsScansTable="true" writeMs3ScansTable="true" writeAllPeptidesTable="true" writeMzRangeTable="true">
    <name>Session1</name>
    <maxQuantVersion>1.5.2.8</maxQuantVersion>
    <tempFolder />
    <numThreads>1</numThreads>
    <sendEmail>false</sendEmail>
-   <fixedCombinedFolder />
+   <fixedCombinedFolder>##__fixedFolder__##</fixedCombinedFolder>
    <ionCountIntensities>false</ionCountIntensities>
    <verboseColumnHeaders>false</verboseColumnHeaders>
    <fullMinMz>-1.7976931348623157E+308</fullMinMz>
@@ -14,19 +14,19 @@
    <showCentroidMassDifferences>false</showCentroidMassDifferences>
    <showIsotopeMassDifferences>false</showIsotopeMassDifferences>
    <filePaths>
-      ##__rowFiles__##
+      ##__rawFiles__##
    </filePaths>
    <experiments>
-      <string />
+      ##__experiment__##
    </experiments>
    <fractions>
-      <short>32767</short>
+      ##__fractions__##
    </fractions>
    <paramGroupIndices>
       ##__Group_Indices__##
    </paramGroupIndices>
    <parameterGroups>
-      ##__Parameter_Groups__##
+     ##__Parameter_Groups__##
    </parameterGroups>
    <fixedModifications>
       <string>Carbamidomethyl (C)</string>
@@ -34,7 +34,7 @@
    <multiModificationSearch>false</multiModificationSearch>
    <compositionPrediction>false</compositionPrediction>
    <fastaFiles>
-      ##__fastaFiles_##
+      ##__fastaFiles__##
    </fastaFiles>
    <fastaFilesFirstSearch />
    <fixedSearchFolder />
