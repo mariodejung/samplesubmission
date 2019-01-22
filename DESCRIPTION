@@ -1,7 +1,7 @@
 Package: samplesubmission
 Type: Package
 Title: Sample Submission User Web Interface
-Version: 0.1.0
+Version: 0.2.0
 Author: Timur Horn
 Maintainer: The package maintainer <timur.horn@stud.th-bingen.de>
 Description: 
@@ -26,4 +26,5 @@ Imports:
   tiff,
   jpeg,
   mailR
-  
+Suggests: 
+    testthat

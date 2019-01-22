@@ -5,12 +5,12 @@
 \title{opens a new browser window or tab where the html will be loaded
 and tries to print it}
 \usage{
-showAndPrintHtmlFile(path, name_replacement = NULL)
+showAndPrintHtmlFile(file, name_replacement = NULL)
 }
 \arguments{
-\item{path}{server path to a file}
-
 \item{name_replacement}{optional, new name for the html file}
+
+\item{path}{server path to a file}
 }
 \value{
 html path relative to www directory

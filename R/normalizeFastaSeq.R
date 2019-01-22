@@ -11,6 +11,6 @@ normalizeFastaSeq <- function(sequence) {
      if(startsWith(line, ">")) return(gsub("\\s+", "_", line))
       return(gsub("\\s+", "", line))
    }), collapse="\n")
-  return(normalizedFatsta)
+  return(paste0(normalizedFatsta,"\n"))
 }
 

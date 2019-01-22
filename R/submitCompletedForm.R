@@ -1,5 +1,6 @@
 #' gather all necessary inputs and uploaded files,
 #' enriches them if necessary and puts them in the output dir
+#' creates finally the filled form and shows it 
 #' @param allInputs all isolated inputs
 #' @param out_directory directory where the outputs well be written to
 #' @return file path to the completed form html and the corresponding web path
@@ -67,12 +68,9 @@ submitCompletedForm <- function(allInputs, out_directory) {
 
   if(allInputs$fasta_sequence!='') {
     fasta_sequence <- normalizeFastaSeq(allInputs$fasta_sequence)
-    ##TODO check content (fasta format)
+    
     path <- normalizePath(file.path(db_out_directory, "custom_seq.fasta"))
-
-    print("faste seq write....")
     write(fasta_sequence, file=path)
-    print("faste seq written")
     allInputs$fasta_sequence <- list(content="Custom Sequence(s) uploaded",
                                      path=path)
     allInputs$target_protein <- c(allInputs$target_protein,
@@ -96,7 +94,7 @@ submitCompletedForm <- function(allInputs, out_directory) {
   
 # write file --------------------------------------------------------------
 
-  yaml::write_yaml(allInputs,file.path(out_directory, user_inputs_file_name))
+  yaml::write_yaml(allInputs, file.path(out_directory, user_inputs_file_name))
 
   form_output_file <- file.path(out_directory, "CompletedForm.html")
 

@@ -29,32 +29,32 @@ ui <- fluidPage(theme="style.css",
     ##TODO credentials
     #shiny::actionButton(inputId="testMark", label="TEST MARK ELEMENTS"),
     column(12,
-           h3("Contact Information"),
-           tags$div(class="userinfos",
-                    # HTML(paste0(sapply(names(user_info_fields), function(field){
-                    #         sprintf("%s",shiny::textInput(field, user_info_fields[[field]]))
-                    #       }),collapse="\n")),
-                    tagList(lapply(names(user_info_fields), function(field){
-                      shiny::textInput(field, user_info_fields[[field]])
-                    })),
+     h3("Contact Information"),
+     tags$div(class="userinfos",
+              # HTML(paste0(sapply(names(user_info_fields), function(field){
+              #         sprintf("%s",shiny::textInput(field, user_info_fields[[field]]))
+              #       }),collapse="\n")),
+              tagList(lapply(names(user_info_fields), function(field){
+                shiny::textInput(field, user_info_fields[[field]])
+              })),
 
-                    shiny::selectInput("group", "Group", selectize=FALSE,
-                                       choices=c("", names(available_groups))),
-                    shiny::textAreaInput("affiliation", "Billing address (if external)", cols=3)
+              shiny::selectInput("group", "Group", selectize=FALSE,
+                                 choices=c("", names(available_groups))),
+              shiny::textAreaInput("affiliation", "Billing address (if external)", cols=3)
 
-                    ##Mario also commented below, these fields should be created with a list since you will use ALL these names again for validation.
-                    ##Mario maybe you can also add the validation to the list as well as width
-                    ##Mario might be a bit complicated if we now also add dropdown for group info but should be feasable like
-                    ##Timur keep it simple
-                    # list(
-                    #   list(type='textInput', variable='firstname', name='First name', validation='\\w'),
-                    #   list(type='dropdown', variable='group', name='Group',
-                    #        values=c(IMB_EW='Eva Wolf',
-                    #                 IMB_BU='Falk Butter',
-                    #                 EXT_CF='External'))
-                    # )
-                    ##Mario and we could loop over this list
-           )
+              ##Mario also commented below, these fields should be created with a list since you will use ALL these names again for validation.
+              ##Mario maybe you can also add the validation to the list as well as width
+              ##Mario might be a bit complicated if we now also add dropdown for group info but should be feasable like
+              ##Timur keep it simple
+              # list(
+              #   list(type='textInput', variable='firstname', name='First name', validation='\\w'),
+              #   list(type='dropdown', variable='group', name='Group',
+              #        values=c(IMB_EW='Eva Wolf',
+              #                 IMB_BU='Falk Butter',
+              #                 EXT_CF='External'))
+              # )
+              ##Mario and we could loop over this list
+     )
     )
   ),
 

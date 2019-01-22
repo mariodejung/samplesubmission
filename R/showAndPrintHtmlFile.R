@@ -9,7 +9,7 @@
 #' \dontrun{
 #' showAndPrintHtmlFile("form.html", "tmp")
 #' }
-showAndPrintHtmlFile <- function(path, name_replacement=NULL){
+showAndPrintHtmlFile <- function(file, name_replacement=NULL){
 
   new_dir <- file.path("www", "tmp")
   if(!dir.exists(new_dir)){
@@ -20,7 +20,7 @@ showAndPrintHtmlFile <- function(path, name_replacement=NULL){
   if(!is.null(name_replacement) && typeof(name_replacement) == "character"){
     new_path <- file.path(new_path, paste0(name_replacement, ".html"))
   }
-  file.copy(path, new_path)
+  file.copy(file, new_path)
   #print(new_path)
   js_path <- sub(pattern="^www.", "", new_path)
   js$winopenAndPrint(js_path)

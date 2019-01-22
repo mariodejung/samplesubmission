@@ -3,7 +3,8 @@
 \name{submitCompletedForm}
 \alias{submitCompletedForm}
 \title{gather all necessary inputs and uploaded files,
-enriches them if necessary and puts them in the output dir}
+enriches them if necessary and puts them in the output dir
+creates finally the filled form and shows it}
 \usage{
 submitCompletedForm(allInputs, out_directory)
 }
@@ -18,6 +19,7 @@ file path to the completed form html and the corresponding web path
 \description{
 gather all necessary inputs and uploaded files,
 enriches them if necessary and puts them in the output dir
+creates finally the filled form and shows it
 }
 \examples{
 \dontrun{
