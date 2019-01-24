@@ -4,7 +4,7 @@
 #' @param rawFiles optionaly vector of raw files paths
 #' @param templateFile template File path. If NULL(standard), attempts read template from package by means of version
 #' @param fixedFolder should MaxQuant create an extra folder.
-#' @version MaxQuant version. for each version there should be a template file in the package 
+#' @param MaxQuant version. for each version there should be a template file in the package 
 #' @export
 #' @return filled mqpar string
 #' @examples
