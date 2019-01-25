@@ -3,6 +3,8 @@
 # Script to do the band identification.
 # 
 # This script has to be executed within the folder with all the raw files. 
+# This version creates reportings for all Proteins with 'Most peptides',
+# 'Highest intensity' and Proteins of Interest from user_inputs.yaml
 #
 # developer: Mario Dejung <m.dejung@imb.de>
 # version: 0.0.25
@@ -42,7 +44,11 @@ if(file.exists(user_inputs_file_name)){
 data_directory <- file.path('combined','txt') # where are the txt files located
 data_directory <- file.path('example_data','EW_0210') # where are the txt files located
 out_directory <- file.path('.')
-FASTA_DBs <- c(ifelse(exists("users_inputs"), user_inputs$fasta_sequence$path, NULL))
+if(exists("user_inputs")){
+  FASTA_DBs <- c(user_inputs$fasta_sequence$path)
+}else{
+  FASTA_DBs <- user_inputs$fasta_sequence$path
+}
 # provide full path to fasta file in case of problems like:
 # c('C:\path\to\db.fasta','E:\some\other\path\otherdb.fasta')
 background_system <- '' # we search this term in the Fasta.headers and 
@@ -249,7 +255,7 @@ sorted_by_peptide_order <- order(-as.numeric(pep_counts))
 sorted_by_intensity_order <- order(-data$Intensity)
 
 protein_ids <- list()
-protein_ids$`Most pepdides` <-  unlist(strsplit(as.character(data$Protein.IDs[sorted_by_peptide_order[1]]), ';'))
+protein_ids$`Most peptides` <-  unlist(strsplit(as.character(data$Protein.IDs[sorted_by_peptide_order[1]]), ';'))
 protein_ids$`Highest intensity` <- unlist(strsplit(as.character(data$Protein.IDs[sorted_by_intensity_order[1]]), ';'))
 
 if(sort_by_peptide_count) {
